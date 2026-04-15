@@ -282,7 +282,7 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"notebookPath": "/Users/duque.smart1397@outlook.com/CICD-Databricks/Proceso/3.Transform_Orders_end",
+					"notebookPath": "/Users/duque.smart1397@outlook.com/CICD-Databricks/Proceso/4.Transform_Orders_end",
 					"baseParameters": {
 						"schemaSilver": "silver"
 					}
