@@ -24,6 +24,10 @@
 						"schemaGold": "gold",
 						"credential_": "credential_dev"
 					}
+				},
+				"linkedServiceName": {
+					"referenceName": "ls_adb_dev",
+					"type": "LinkedServiceReference"
 				}
 			},
 			{
@@ -51,6 +55,10 @@
 						"storageName": "adlssmartprojectdev13",
 						"container": "raw"
 					}
+				},
+				"linkedServiceName": {
+					"referenceName": "ls_adb_dev",
+					"type": "LinkedServiceReference"
 				}
 			},
 			{
@@ -79,6 +87,10 @@
 						"schemaBronze": "bronze",
 						"schemaSilver": "silver"
 					}
+				},
+				"linkedServiceName": {
+					"referenceName": "ls_adb_dev",
+					"type": "LinkedServiceReference"
 				}
 			},
 			{
@@ -107,6 +119,10 @@
 						"schemaBronze": "bronze",
 						"schemaSilver": "silver"
 					}
+				},
+				"linkedServiceName": {
+					"referenceName": "ls_adb_dev",
+					"type": "LinkedServiceReference"
 				}
 			},
 			{
@@ -135,6 +151,10 @@
 						"schemaBronze": "bronze",
 						"schemaSilver": "silver"
 					}
+				},
+				"linkedServiceName": {
+					"referenceName": "ls_adb_dev",
+					"type": "LinkedServiceReference"
 				}
 			},
 			{
@@ -162,6 +182,10 @@
 						"schemaBronze": "bronze",
 						"schemaSilver": "silver"
 					}
+				},
+				"linkedServiceName": {
+					"referenceName": "ls_adb_dev",
+					"type": "LinkedServiceReference"
 				}
 			},
 			{
@@ -189,6 +213,10 @@
 						"schemaBronze": "bronze",
 						"schemaSilver": "silver"
 					}
+				},
+				"linkedServiceName": {
+					"referenceName": "ls_adb_dev",
+					"type": "LinkedServiceReference"
 				}
 			}
 		],
