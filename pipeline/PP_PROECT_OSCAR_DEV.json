@@ -284,7 +284,37 @@
 				"typeProperties": {
 					"notebookPath": "/Users/duque.smart1397@outlook.com/CICD-Databricks/Proceso/3.Transform_Orders_end",
 					"baseParameters": {
-						"schemaBronze": "bronze",
+						"schemaSilver": "silver"
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "ls_adb_dev",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "Load_orders",
+				"type": "DatabricksNotebook",
+				"dependsOn": [
+					{
+						"activity": "Transform_Orders_end",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "/Users/duque.smart1397@outlook.com/CICD-Databricks/Proceso/5.Load_orders",
+					"baseParameters": {
+						"schemaGold": "gold",
 						"schemaSilver": "silver"
 					}
 				},
