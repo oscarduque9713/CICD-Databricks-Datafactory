@@ -21,6 +21,43 @@
 	},
 	"resources": [
 		{
+			"name": "[concat(parameters('factoryName'), '/akvdev')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureKeyVault",
+				"typeProperties": {
+					"baseUrl": "[parameters('akvdev_properties_typeProperties_baseUrl')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ls_adb_dev')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureDatabricks",
+				"typeProperties": {
+					"domain": "https://adb-7405618610925729.9.azuredatabricks.net",
+					"accessToken": {
+						"type": "AzureKeyVaultSecret",
+						"store": {
+							"referenceName": "akvdev",
+							"type": "LinkedServiceReference"
+						},
+						"secretName": "kvtokendtb"
+					},
+					"existingClusterId": "[parameters('ls_adb_dev_properties_typeProperties_existingClusterId')]"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/akvdev')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/PP_PROECT_OSCAR_DEV')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
@@ -306,7 +343,7 @@
 						},
 						"userProperties": [],
 						"typeProperties": {
-							"notebookPath": "/Users/duque.smart1397@outlook.com/CICD-Databricks/Proceso/3.Transform_Orders_end",
+							"notebookPath": "/Users/duque.smart1397@outlook.com/CICD-Databricks/Proceso/4.Transform_Orders_end",
 							"baseParameters": {
 								"schemaSilver": "silver"
 							}
@@ -362,43 +399,6 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/ls_adb_dev')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/akvdev')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "AzureKeyVault",
-				"typeProperties": {
-					"baseUrl": "[parameters('akvdev_properties_typeProperties_baseUrl')]"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/ls_adb_dev')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "AzureDatabricks",
-				"typeProperties": {
-					"domain": "https://adb-7405618610925729.9.azuredatabricks.net",
-					"accessToken": {
-						"type": "AzureKeyVaultSecret",
-						"store": {
-							"referenceName": "akvdev",
-							"type": "LinkedServiceReference"
-						},
-						"secretName": "kvtokendtb"
-					},
-					"existingClusterId": "[parameters('ls_adb_dev_properties_typeProperties_existingClusterId')]"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/akvdev')]"
 			]
 		}
 	]
