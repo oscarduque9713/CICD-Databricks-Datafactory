@@ -35,10 +35,6 @@
 			"type": "string",
 			"defaultValue": "/Users/duque.smart1397@outlook.com/CICD-Databricks/Proceso/"
 		},
-		"PP_PROECT_OSCAR_DEV_properties_parameters_storageName_defaultValue": {
-			"type": "string",
-			"defaultValue": "adlssmartprojectdev13"
-		},
 		"PP_PROECT_OSCAR_DEV_properties_parameters_credential__defaultValue": {
 			"type": "string",
 			"defaultValue": "credential_dev"
@@ -624,10 +620,6 @@
 					"path": {
 						"type": "string",
 						"defaultValue": "[parameters('PP_PROECT_OSCAR_DEV_properties_parameters_path_defaultValue')]"
-					},
-					"storageName": {
-						"type": "string",
-						"defaultValue": "[parameters('PP_PROECT_OSCAR_DEV_properties_parameters_storageName_defaultValue')]"
 					},
 					"credential_": {
 						"type": "string",
