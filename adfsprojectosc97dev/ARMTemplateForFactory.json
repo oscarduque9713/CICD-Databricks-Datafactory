@@ -7,26 +7,15 @@
 			"metadata": "Data Factory name",
 			"defaultValue": "adfsprojectosc97dev"
 		},
-		"akvdev_properties_typeProperties_baseUrl": {
-			"type": "string",
-			"defaultValue": "https://kvprojectosc13.vault.azure.net/"
+		"dls_con_properties_typeProperties_storageAccountUrl": {
+        	"type": "string",
+        	"defaultValue": "https://adlssmartprojectdev13.dfs.core.windows.net/"
 		},
-		"ls_adb_dev_properties_typeProperties_domain": {
-			"type": "string",
-			"defaultValue": "@linkedService().domain"
-		},
-		"ls_adb_dev_properties_typeProperties_existingClusterId": {
-			"type": "string",
-			"defaultValue": "@linkedService().cluster"
-		},
-		"ls_adb_prod_properties_typeProperties_domain": {
-			"type": "string",
-			"defaultValue": "https://adb-7405618610925729.9.azuredatabricks.net"
-		},
-		"ls_adb_prod_properties_typeProperties_existingClusterId": {
-			"type": "string",
-			"defaultValue": "0409-155234-i86h65ts"
+		"dls_con_properties_typeProperties_secretName": {
+        	"type": "string",
+        	"defaultValue": "storagesecretdev"
 		}
+    }
 	},
 	"variables": {
 		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
