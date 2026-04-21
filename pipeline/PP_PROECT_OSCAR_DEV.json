@@ -27,6 +27,15 @@
 						"schemaGold": "gold",
 						"credential_": "credential_dev"
 					}
+				},
+				"linkedServiceName": {
+					"referenceName": "ls_adb_dev",
+					"type": "LinkedServiceReference",
+					"parameters": {
+						"domain": "https://adb-7405618610925729.9.azuredatabricks.net",
+						"secretname": "kvtokendtb",
+						"cluster": "0409-155234-i86h65ts"
+					}
 				}
 			},
 			{
@@ -57,6 +66,15 @@
 						"storageName": "adlssmartprojectdev13",
 						"container": "raw"
 					}
+				},
+				"linkedServiceName": {
+					"referenceName": "ls_adb_dev",
+					"type": "LinkedServiceReference",
+					"parameters": {
+						"domain": "https://adb-7405618610925729.9.azuredatabricks.net",
+						"secretname": "kvtokendtb",
+						"cluster": "0409-155234-i86h65ts"
+					}
 				}
 			},
 			{
@@ -80,13 +98,22 @@
 				"userProperties": [],
 				"typeProperties": {
 					"notebookPath": {
-						"value": "@concat( pipeline().parameters.base_path, '2.Ingest_Orders')",
+						"value": "@concat( pipeline().parameters.path, '2.Ingest_Orders')",
 						"type": "Expression"
 					},
 					"baseParameters": {
 						"storageName": "adlssmartprojectdev13",
 						"schemaBronze": "bronze",
 						"schemaSilver": "silver"
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "ls_adb_dev",
+					"type": "LinkedServiceReference",
+					"parameters": {
+						"domain": "https://adb-7405618610925729.9.azuredatabricks.net",
+						"secretname": "kvtokendtb",
+						"cluster": "0409-155234-i86h65ts"
 					}
 				}
 			},
@@ -119,6 +146,15 @@
 						"schemaBronze": "bronze",
 						"schemaSilver": "silver"
 					}
+				},
+				"linkedServiceName": {
+					"referenceName": "ls_adb_dev",
+					"type": "LinkedServiceReference",
+					"parameters": {
+						"domain": "https://adb-7405618610925729.9.azuredatabricks.net",
+						"secretname": "kvtokendtb",
+						"cluster": "0409-155234-i86h65ts"
+					}
 				}
 			},
 			{
@@ -150,6 +186,15 @@
 						"schemaBronze": "bronze",
 						"schemaSilver": "silver"
 					}
+				},
+				"linkedServiceName": {
+					"referenceName": "ls_adb_dev",
+					"type": "LinkedServiceReference",
+					"parameters": {
+						"domain": "https://adb-7405618610925729.9.azuredatabricks.net",
+						"secretname": "kvtokendtb",
+						"cluster": "0409-155234-i86h65ts"
+					}
 				}
 			},
 			{
@@ -179,6 +224,15 @@
 					"baseParameters": {
 						"schemaBronze": "bronze",
 						"schemaSilver": "silver"
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "ls_adb_dev",
+					"type": "LinkedServiceReference",
+					"parameters": {
+						"domain": "https://adb-7405618610925729.9.azuredatabricks.net",
+						"secretname": "kvtokendtb",
+						"cluster": "0409-155234-i86h65ts"
 					}
 				}
 			},
@@ -210,6 +264,15 @@
 						"schemaBronze": "bronze",
 						"schemaSilver": "silver"
 					}
+				},
+				"linkedServiceName": {
+					"referenceName": "ls_adb_dev",
+					"type": "LinkedServiceReference",
+					"parameters": {
+						"domain": "https://adb-7405618610925729.9.azuredatabricks.net",
+						"secretname": "kvtokendtb",
+						"cluster": "0409-155234-i86h65ts"
+					}
 				}
 			},
 			{
@@ -239,6 +302,15 @@
 					"baseParameters": {
 						"schemaBronze": "bronze",
 						"schemaSilver": "silver"
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "ls_adb_dev",
+					"type": "LinkedServiceReference",
+					"parameters": {
+						"domain": "https://adb-7405618610925729.9.azuredatabricks.net",
+						"secretname": "kvtokendtb",
+						"cluster": "0409-155234-i86h65ts"
 					}
 				}
 			},
@@ -281,6 +353,15 @@
 					"baseParameters": {
 						"schemaSilver": "silver"
 					}
+				},
+				"linkedServiceName": {
+					"referenceName": "ls_adb_dev",
+					"type": "LinkedServiceReference",
+					"parameters": {
+						"domain": "https://adb-7405618610925729.9.azuredatabricks.net",
+						"secretname": "kvtokendtb",
+						"cluster": "0409-155234-i86h65ts"
+					}
 				}
 			},
 			{
@@ -310,6 +391,15 @@
 					"baseParameters": {
 						"schemaGold": "gold",
 						"schemaSilver": "silver"
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "ls_adb_dev",
+					"type": "LinkedServiceReference",
+					"parameters": {
+						"domain": "https://adb-7405618610925729.9.azuredatabricks.net",
+						"secretname": "kvtokendtb",
+						"cluster": "0409-155234-i86h65ts"
 					}
 				}
 			}
