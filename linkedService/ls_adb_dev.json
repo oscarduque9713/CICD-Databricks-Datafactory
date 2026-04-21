@@ -18,7 +18,7 @@
 		"annotations": [],
 		"type": "AzureDatabricks",
 		"typeProperties": {
-			"domain": "@domain",
+			"domain": "@linkedservice.domain",
 			"accessToken": {
 				"type": "AzureKeyVaultSecret",
 				"store": {
