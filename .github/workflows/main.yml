@@ -31,8 +31,6 @@ jobs:
           parameters: >
             ./adfsprojectosc97dev/ARMTemplateParametersForFactory.json
             factoryName="adfsprojectosc97prod"
-            # URL DEL KEY VAULT (Punto de acceso a secretos)
-            # akvdev_properties_typeProperties_baseUrl="https://kvprojectosc13.vault.azure.net/"
             
             # ID DEL CLUSTER (Conexión física)
             ls_adb_prod_properties_typeProperties_existingClusterId="0414-175402-ycrjrf77"
