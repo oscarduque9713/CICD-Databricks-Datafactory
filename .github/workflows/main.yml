@@ -35,3 +35,4 @@ jobs:
             PP_PROECT_OSCAR_DEV_properties_parameters_path_defaultValue="/Workspace/Users/duque.smart1397@outlook.com/deploy/"
             PP_PROECT_OSCAR_DEV_properties_parameters_catalogo_defaultValue="project_prod"
             PP_PROECT_OSCAR_DEV_properties_parameters_storageName_defaultValue="adlssmartproject13prod"
+            PP_PROECT_OSCAR_DEV_properties_parameters_credential__defaultValue="credential_prod"
