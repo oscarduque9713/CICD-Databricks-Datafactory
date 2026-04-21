@@ -123,7 +123,7 @@
 				"annotations": [],
 				"type": "AzureDatabricks",
 				"typeProperties": {
-					"domain": "[parameters('ls_adb_dev_properties_typeProperties_domain')]",
+					"domain": "https://adb-7405618610925729.9.azuredatabricks.net",
 					"accessToken": {
 						"type": "AzureKeyVaultSecret",
 						"store": {
@@ -135,7 +135,7 @@
 							"type": "Expression"
 						}
 					},
-					"existingClusterId": "[parameters('ls_adb_dev_properties_typeProperties_existingClusterId')]"
+					"existingClusterId": "0409-155234-i86h65ts"
 				}
 			},
 			"dependsOn": [
@@ -150,7 +150,7 @@
 				"annotations": [],
 				"type": "AzureDatabricks",
 				"typeProperties": {
-					"domain": "[parameters('ls_adb_prod_properties_typeProperties_domain')]",
+					"domain": "https://adb-7405618610925729.9.azuredatabricks.net",
 					"accessToken": {
 						"type": "AzureKeyVaultSecret",
 						"store": {
@@ -159,7 +159,7 @@
 						},
 						"secretName": "kvtokendtb"
 					},
-					"existingClusterId": "[parameters('ls_adb_prod_properties_typeProperties_existingClusterId')]"
+					"existingClusterId": "0409-155234-i86h65ts"
 				}
 			},
 			"dependsOn": [
