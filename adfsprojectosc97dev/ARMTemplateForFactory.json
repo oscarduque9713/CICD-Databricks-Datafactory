@@ -64,7 +64,7 @@
 				"annotations": [],
 				"type": "AzureKeyVault",
 				"typeProperties": {
-					"baseUrl": "[parameters('akvdev_properties_typeProperties_baseUrl')]"
+					"baseUrl": "https://kvprojectosc13.vault.azure.net/"
 				}
 			},
 			"dependsOn": []
