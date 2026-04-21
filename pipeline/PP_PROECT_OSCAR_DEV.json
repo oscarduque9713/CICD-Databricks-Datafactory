@@ -28,7 +28,7 @@
 					},
 					"baseParameters": {
 						"storageName": {
-							"value": "@activity('GetConfig').output.firstRow.storageName\n",
+							"value": "@activity('GetConfig').output.firstRow.storageName",
 							"type": "Expression"
 						},
 						"container": "raw",
@@ -49,9 +49,18 @@
 					"referenceName": "ls_adb_dev",
 					"type": "LinkedServiceReference",
 					"parameters": {
-						"domain": "https://adb-7405618610925729.9.azuredatabricks.net",
-						"secretname": "kvtokendtb",
-						"cluster": "0409-155234-i86h65ts"
+						"domain": {
+							"value": "@activity('GetConfig').output.firstRow.domain",
+							"type": "Expression"
+						},
+						"secretname": {
+							"value": "@activity('GetConfig').output.firstRow.secretname",
+							"type": "Expression"
+						},
+						"cluster": {
+							"value": "@activity('GetConfig').output.firstRow.cluster_id",
+							"type": "Expression"
+						}
 					}
 				}
 			},
@@ -96,9 +105,18 @@
 					"referenceName": "ls_adb_dev",
 					"type": "LinkedServiceReference",
 					"parameters": {
-						"domain": "https://adb-7405618610925729.9.azuredatabricks.net",
-						"secretname": "kvtokendtb",
-						"cluster": "0409-155234-i86h65ts"
+						"domain": {
+							"value": "@activity('GetConfig').output.firstRow.domain",
+							"type": "Expression"
+						},
+						"secretname": {
+							"value": "@activity('GetConfig').output.firstRow.secretname",
+							"type": "Expression"
+						},
+						"cluster": {
+							"value": "@activity('GetConfig').output.firstRow.cluster_id",
+							"type": "Expression"
+						}
 					}
 				}
 			},
@@ -143,9 +161,18 @@
 					"referenceName": "ls_adb_dev",
 					"type": "LinkedServiceReference",
 					"parameters": {
-						"domain": "https://adb-7405618610925729.9.azuredatabricks.net",
-						"secretname": "kvtokendtb",
-						"cluster": "0409-155234-i86h65ts"
+						"domain": {
+							"value": "@activity('GetConfig').output.firstRow.domain",
+							"type": "Expression"
+						},
+						"secretname": {
+							"value": "@activity('GetConfig').output.firstRow.secretname",
+							"type": "Expression"
+						},
+						"cluster": {
+							"value": "@activity('GetConfig').output.firstRow.cluster_id",
+							"type": "Expression"
+						}
 					}
 				}
 			},
@@ -190,9 +217,18 @@
 					"referenceName": "ls_adb_dev",
 					"type": "LinkedServiceReference",
 					"parameters": {
-						"domain": "https://adb-7405618610925729.9.azuredatabricks.net",
-						"secretname": "kvtokendtb",
-						"cluster": "0409-155234-i86h65ts"
+						"domain": {
+							"value": "@activity('GetConfig').output.firstRow.domain",
+							"type": "Expression"
+						},
+						"secretname": {
+							"value": "@activity('GetConfig').output.firstRow.secretname",
+							"type": "Expression"
+						},
+						"cluster": {
+							"value": "@activity('GetConfig').output.firstRow.cluster_id",
+							"type": "Expression"
+						}
 					}
 				}
 			},
@@ -233,9 +269,18 @@
 					"referenceName": "ls_adb_dev",
 					"type": "LinkedServiceReference",
 					"parameters": {
-						"domain": "https://adb-7405618610925729.9.azuredatabricks.net",
-						"secretname": "kvtokendtb",
-						"cluster": "0409-155234-i86h65ts"
+						"domain": {
+							"value": "@activity('GetConfig').output.firstRow.domain",
+							"type": "Expression"
+						},
+						"secretname": {
+							"value": "@activity('GetConfig').output.firstRow.secretname",
+							"type": "Expression"
+						},
+						"cluster": {
+							"value": "@activity('GetConfig').output.firstRow.cluster_id",
+							"type": "Expression"
+						}
 					}
 				}
 			},
@@ -276,9 +321,18 @@
 					"referenceName": "ls_adb_dev",
 					"type": "LinkedServiceReference",
 					"parameters": {
-						"domain": "https://adb-7405618610925729.9.azuredatabricks.net",
-						"secretname": "kvtokendtb",
-						"cluster": "0409-155234-i86h65ts"
+						"domain": {
+							"value": "@activity('GetConfig').output.firstRow.domain",
+							"type": "Expression"
+						},
+						"secretname": {
+							"value": "@activity('GetConfig').output.firstRow.secretname",
+							"type": "Expression"
+						},
+						"cluster": {
+							"value": "@activity('GetConfig').output.firstRow.cluster_id",
+							"type": "Expression"
+						}
 					}
 				}
 			},
@@ -319,9 +373,18 @@
 					"referenceName": "ls_adb_dev",
 					"type": "LinkedServiceReference",
 					"parameters": {
-						"domain": "https://adb-7405618610925729.9.azuredatabricks.net",
-						"secretname": "kvtokendtb",
-						"cluster": "0409-155234-i86h65ts"
+						"domain": {
+							"value": "@activity('GetConfig').output.firstRow.domain",
+							"type": "Expression"
+						},
+						"secretname": {
+							"value": "@activity('GetConfig').output.firstRow.secretname",
+							"type": "Expression"
+						},
+						"cluster": {
+							"value": "@activity('GetConfig').output.firstRow.cluster_id",
+							"type": "Expression"
+						}
 					}
 				}
 			},
@@ -373,9 +436,18 @@
 					"referenceName": "ls_adb_dev",
 					"type": "LinkedServiceReference",
 					"parameters": {
-						"domain": "https://adb-7405618610925729.9.azuredatabricks.net",
-						"secretname": "kvtokendtb",
-						"cluster": "0409-155234-i86h65ts"
+						"domain": {
+							"value": "@activity('GetConfig').output.firstRow.domain",
+							"type": "Expression"
+						},
+						"secretname": {
+							"value": "@activity('GetConfig').output.firstRow.secretname",
+							"type": "Expression"
+						},
+						"cluster": {
+							"value": "@activity('GetConfig').output.firstRow.cluster_id",
+							"type": "Expression"
+						}
 					}
 				}
 			},
@@ -416,9 +488,18 @@
 					"referenceName": "ls_adb_dev",
 					"type": "LinkedServiceReference",
 					"parameters": {
-						"domain": "https://adb-7405618610925729.9.azuredatabricks.net",
-						"secretname": "kvtokendtb",
-						"cluster": "0409-155234-i86h65ts"
+						"domain": {
+							"value": "@activity('GetConfig').output.firstRow.domain",
+							"type": "Expression"
+						},
+						"secretname": {
+							"value": "@activity('GetConfig').output.firstRow.secretname",
+							"type": "Expression"
+						},
+						"cluster": {
+							"value": "@activity('GetConfig').output.firstRow.cluster_id",
+							"type": "Expression"
+						}
 					}
 				}
 			},
