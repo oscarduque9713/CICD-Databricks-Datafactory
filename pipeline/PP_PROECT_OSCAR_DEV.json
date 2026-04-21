@@ -5,7 +5,14 @@
 			{
 				"name": "Prep_Amb",
 				"type": "DatabricksNotebook",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "GetCongif",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
 				"policy": {
 					"timeout": "0.12:00:00",
 					"retry": 1,
@@ -20,12 +27,18 @@
 						"type": "Expression"
 					},
 					"baseParameters": {
-						"storageName": "adlssmartprojectdev13",
+						"storageName": {
+							"value": "activity('GetConfig').output.value[0].storageName\n\n",
+							"type": "Expression"
+						},
 						"container": "raw",
 						"schemaBronze": "bronze",
 						"schemaSilver": "silver",
 						"schemaGold": "gold",
-						"credential_": "credential_dev"
+						"credential_": {
+							"value": "activity('GetConfig').output.value[0].credential_",
+							"type": "Expression"
+						}
 					}
 				},
 				"linkedServiceName": {
@@ -63,7 +76,10 @@
 						"type": "Expression"
 					},
 					"baseParameters": {
-						"storageName": "adlssmartprojectdev13",
+						"storageName": {
+							"value": "activity('GetConfig').output.value[0].storageName",
+							"type": "Expression"
+						},
 						"schemaBronze": "bronze",
 						"schemaSilver": "silver"
 					}
@@ -103,7 +119,10 @@
 						"type": "Expression"
 					},
 					"baseParameters": {
-						"storageName": "adlssmartprojectdev13",
+						"storageName": {
+							"value": "activity('GetConfig').output.value[0].storageName",
+							"type": "Expression"
+						},
 						"schemaBronze": "bronze",
 						"schemaSilver": "silver"
 					}
@@ -143,7 +162,10 @@
 						"type": "Expression"
 					},
 					"baseParameters": {
-						"storageName": "adlssmartprojectdev13",
+						"storageName": {
+							"value": "activity('GetConfig').output.value[0].storageName",
+							"type": "Expression"
+						},
 						"schemaBronze": "bronze",
 						"schemaSilver": "silver"
 					}
@@ -361,6 +383,36 @@
 						"domain": "https://adb-7405618610925729.9.azuredatabricks.net",
 						"secretname": "kvtokendtb",
 						"cluster": "0409-155234-i86h65ts"
+					}
+				}
+			},
+			{
+				"name": "GetCongif",
+				"type": "Lookup",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"dataset": {
+						"referenceName": "configParameter",
+						"type": "DatasetReference"
 					}
 				}
 			}
