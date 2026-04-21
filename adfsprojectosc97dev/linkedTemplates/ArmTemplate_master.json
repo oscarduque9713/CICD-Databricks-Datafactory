@@ -15,10 +15,6 @@
 			"type": "string",
 			"defaultValue": "/Users/duque.smart1397@outlook.com/CICD-Databricks/Proceso/"
 		},
-		"PP_PROECT_OSCAR_DEV_properties_parameters_credential__defaultValue": {
-			"type": "string",
-			"defaultValue": "credential_dev"
-		},
 		"akvdev_properties_typeProperties_baseUrl": {
 			"type": "string",
 			"defaultValue": "https://kvprojectosc13.vault.azure.net/"
@@ -86,9 +82,6 @@
 					},
 					"PP_PROECT_OSCAR_DEV_properties_parameters_path_defaultValue": {
 						"value": "[parameters('PP_PROECT_OSCAR_DEV_properties_parameters_path_defaultValue')]"
-					},
-					"PP_PROECT_OSCAR_DEV_properties_parameters_credential__defaultValue": {
-						"value": "[parameters('PP_PROECT_OSCAR_DEV_properties_parameters_credential__defaultValue')]"
 					}
 				}
 			},
