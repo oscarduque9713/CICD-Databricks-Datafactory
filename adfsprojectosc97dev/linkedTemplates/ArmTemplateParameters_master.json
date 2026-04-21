@@ -17,17 +17,17 @@
 		"akvdev_properties_typeProperties_baseUrl": {
 			"value": "https://kvprojectosc13.vault.azure.net/"
 		},
-		"ls_adb_dev_properties_typeProperties_domain": {
-			"value": "@domain"
-		},
-		"ls_adb_dev_properties_typeProperties_existingClusterId": {
-			"value": "@cluster"
-		},
 		"ls_adb_prod_properties_typeProperties_domain": {
-			"value": "https://adb-7405611378919410.10.azuredatabricks.net"
+			"value": "https://adb-7405618610925729.9.azuredatabricks.net"
 		},
 		"ls_adb_prod_properties_typeProperties_existingClusterId": {
-			"value": "0414-175402-ycrjrf77"
+			"value": "0409-155234-i86h65ts"
+		},
+		"ls_adb_dev_properties_typeProperties_domain": {
+			"value": "@linkedService().domain"
+		},
+		"ls_adb_dev_properties_typeProperties_existingClusterId": {
+			"value": "@linkedService().cluster"
 		},
 		"containerUri": {
 			"value": ""

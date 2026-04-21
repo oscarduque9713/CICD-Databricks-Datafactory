@@ -23,21 +23,21 @@
 			"type": "string",
 			"defaultValue": "https://kvprojectosc13.vault.azure.net/"
 		},
-		"ls_adb_dev_properties_typeProperties_domain": {
-			"type": "string",
-			"defaultValue": "@domain"
-		},
-		"ls_adb_dev_properties_typeProperties_existingClusterId": {
-			"type": "string",
-			"defaultValue": "@cluster"
-		},
 		"ls_adb_prod_properties_typeProperties_domain": {
 			"type": "string",
-			"defaultValue": "https://adb-7405611378919410.10.azuredatabricks.net"
+			"defaultValue": "https://adb-7405618610925729.9.azuredatabricks.net"
 		},
 		"ls_adb_prod_properties_typeProperties_existingClusterId": {
 			"type": "string",
-			"defaultValue": "0414-175402-ycrjrf77"
+			"defaultValue": "0409-155234-i86h65ts"
+		},
+		"ls_adb_dev_properties_typeProperties_domain": {
+			"type": "string",
+			"defaultValue": "@linkedService().domain"
+		},
+		"ls_adb_dev_properties_typeProperties_existingClusterId": {
+			"type": "string",
+			"defaultValue": "@linkedService().cluster"
 		},
 		"containerUri": {
 			"type": "string",
@@ -66,21 +66,6 @@
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
 					},
-					"akvdev_properties_typeProperties_baseUrl": {
-						"value": "[parameters('akvdev_properties_typeProperties_baseUrl')]"
-					},
-					"ls_adb_dev_properties_typeProperties_domain": {
-						"value": "[parameters('ls_adb_dev_properties_typeProperties_domain')]"
-					},
-					"ls_adb_dev_properties_typeProperties_existingClusterId": {
-						"value": "[parameters('ls_adb_dev_properties_typeProperties_existingClusterId')]"
-					},
-					"ls_adb_prod_properties_typeProperties_domain": {
-						"value": "[parameters('ls_adb_prod_properties_typeProperties_domain')]"
-					},
-					"ls_adb_prod_properties_typeProperties_existingClusterId": {
-						"value": "[parameters('ls_adb_prod_properties_typeProperties_existingClusterId')]"
-					},
 					"PP_PROECT_OSCAR_DEV_properties_parameters_catalogo_defaultValue": {
 						"value": "[parameters('PP_PROECT_OSCAR_DEV_properties_parameters_catalogo_defaultValue')]"
 					},
@@ -89,6 +74,21 @@
 					},
 					"PP_PROECT_OSCAR_DEV_properties_parameters_path_defaultValue": {
 						"value": "[parameters('PP_PROECT_OSCAR_DEV_properties_parameters_path_defaultValue')]"
+					},
+					"akvdev_properties_typeProperties_baseUrl": {
+						"value": "[parameters('akvdev_properties_typeProperties_baseUrl')]"
+					},
+					"ls_adb_prod_properties_typeProperties_domain": {
+						"value": "[parameters('ls_adb_prod_properties_typeProperties_domain')]"
+					},
+					"ls_adb_prod_properties_typeProperties_existingClusterId": {
+						"value": "[parameters('ls_adb_prod_properties_typeProperties_existingClusterId')]"
+					},
+					"ls_adb_dev_properties_typeProperties_domain": {
+						"value": "[parameters('ls_adb_dev_properties_typeProperties_domain')]"
+					},
+					"ls_adb_dev_properties_typeProperties_existingClusterId": {
+						"value": "[parameters('ls_adb_dev_properties_typeProperties_existingClusterId')]"
 					}
 				}
 			},
