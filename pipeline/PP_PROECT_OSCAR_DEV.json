@@ -36,7 +36,7 @@
 						"schemaSilver": "silver",
 						"schemaGold": "gold",
 						"credential_": {
-							"value": "@activity('GetConfig').output.value[0].credential_\n",
+							"value": "@activity('GetConfig').output.value[0].credential_",
 							"type": "Expression"
 						}
 					}
