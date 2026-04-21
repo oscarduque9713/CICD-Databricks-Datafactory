@@ -71,7 +71,7 @@
 							"type": "LinkedServiceReference"
 						},
 						"secretName": {
-							"value": "@linkedService().storage",
+							"value": "@linkedService().secretName",
 							"type": "Expression"
 						}
 					}
