@@ -18,16 +18,16 @@
 		"annotations": [],
 		"type": "AzureDatabricks",
 		"typeProperties": {
-			"domain": "@linkedservice.domain",
+			"domain": "@linkedService().domain",
 			"accessToken": {
 				"type": "AzureKeyVaultSecret",
 				"store": {
 					"referenceName": "akvdev",
 					"type": "LinkedServiceReference"
 				},
-				"secretName": "@secretname"
+				"secretName": "@linkedService().secretname"
 			},
-			"existingClusterId": "@cluster"
+			"existingClusterId": "@linkedService().cluster"
 		}
 	}
 }
