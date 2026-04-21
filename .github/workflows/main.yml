@@ -1,36 +1,35 @@
-name: Deploy-ADF-Infrastructure
+name: Deploy-ADF-Production
 
 on:
   push:
     branches:
-      - main  # Se dispara cuando haces merge a main
+      - main # Se activa al hacer push o merge a main
 
 jobs:
-  build-and-deploy:
+  deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      # 1. Bajamos el código de la rama adf_publish (donde están las plantillas)
+      - name: Checkout adf_publish branch
+        uses: actions/checkout@v3
+        with:
+          ref: adf_publish
 
-      - name: Login to Azure
+      # 2. Login en Azure usando tu secreto
+      - name: Azure Login
         uses: azure/login@v1
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-      # Paso crítico: Validar y generar la plantilla desde tus carpetas individuales
-      - name: export-arm-template
-        run: |
-          npm install @microsoft/azure-data-factory-utilities
-          # Este comando convierte tus carpetas en el archivo final de despliegue
-          node node_modules/@microsoft/azure-data-factory-utilities/lib/index.js export ${{ github.workspace }} /subscriptions/${{ secrets.SUBSCRIPTION_ID }}/resourceGroups/${{ secrets.RG }}/providers/Microsoft.DataFactory/factories/${{ secrets.ADF_NAME }} "ExportedArmTemplate"
-
+      # 3. Despliegue de la plantilla ARM
       - name: Deploy ARM Template
         uses: azure/arm-deploy@v1
         with:
-          resourceGroupName: ${{ secrets.RG }}
-          template: ./ExportedArmTemplate/ARMTemplateForFactory.json
-          # Aquí es donde pasas tus parámetros de producción
+          resourceGroupName: ${{ secrets.RG_NAME }} # Asegúrate de tener este secreto
+          # Ajusta la ruta si tu carpeta tiene un nombre específico
+          template: ./TU_NOMBRE_ADF/ARMTemplateForFactory.json 
           parameters: >
-            ./ExportedArmTemplate/ARMTemplateParametersForFactory.json
-            factoryName=${{ secrets.ADF_PROD_NAME }}
-            PP_PROECT_OSCAR_DEV_properties_parameters_linked_service_defaultValue=ls_adb_prod
-            PP_PROECT_OSCAR_DEV_properties_parameters_base_path_defaultValue=/Workspace/Users/duque.smart1397@outlook.com/deploy/
+            ./adfsprojectosc97dev/ARMTemplateParametersForFactory.json
+            factoryName="PP_PROJECT_DATA_FACTORY_PROD"
+            PP_PROECT_OSCAR_DEV_properties_parameters_linked_service_defaultValue="ls_adb_prod"
+            PP_PROECT_OSCAR_DEV_properties_parameters_base_path_defaultValue="/Workspace/Users/duque.smart1397@outlook.com/deploy/"
