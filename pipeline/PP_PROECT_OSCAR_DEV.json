@@ -7,7 +7,7 @@
 				"type": "DatabricksNotebook",
 				"dependsOn": [
 					{
-						"activity": "GetCongif",
+						"activity": "GetConfig",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -28,7 +28,7 @@
 					},
 					"baseParameters": {
 						"storageName": {
-							"value": "activity('GetConfig').output.value[0].storageName\n\n",
+							"value": "@activity('GetConfig').output.value[0].storageName\n\n",
 							"type": "Expression"
 						},
 						"container": "raw",
@@ -36,7 +36,7 @@
 						"schemaSilver": "silver",
 						"schemaGold": "gold",
 						"credential_": {
-							"value": "activity('GetConfig').output.value[0].credential_",
+							"value": "@activity('GetConfig').output.value[0].credential_\n",
 							"type": "Expression"
 						}
 					}
@@ -77,7 +77,7 @@
 					},
 					"baseParameters": {
 						"storageName": {
-							"value": "activity('GetConfig').output.value[0].storageName",
+							"value": "@activity('GetConfig').output.value[0].storageName",
 							"type": "Expression"
 						},
 						"schemaBronze": "bronze",
@@ -120,7 +120,7 @@
 					},
 					"baseParameters": {
 						"storageName": {
-							"value": "activity('GetConfig').output.value[0].storageName",
+							"value": "@activity('GetConfig').output.value[0].storageName",
 							"type": "Expression"
 						},
 						"schemaBronze": "bronze",
@@ -163,7 +163,7 @@
 					},
 					"baseParameters": {
 						"storageName": {
-							"value": "activity('GetConfig').output.value[0].storageName",
+							"value": "@activity('GetConfig').output.value[0].storageName",
 							"type": "Expression"
 						},
 						"schemaBronze": "bronze",
@@ -387,7 +387,7 @@
 				}
 			},
 			{
-				"name": "GetCongif",
+				"name": "GetConfig",
 				"type": "Lookup",
 				"dependsOn": [],
 				"policy": {
