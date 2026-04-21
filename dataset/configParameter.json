@@ -3,7 +3,10 @@
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "dls_con",
-			"type": "LinkedServiceReference"
+			"type": "LinkedServiceReference",
+			"parameters": {
+				"storage": "storagesecretdev"
+			}
 		},
 		"annotations": [],
 		"type": "DelimitedText",
