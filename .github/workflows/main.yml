@@ -28,7 +28,7 @@ jobs:
           resourceGroupName: "rg-Oscar-DEV" # Asegúrate de tener este secreto
           # Ajusta la ruta si tu carpeta tiene un nombre específico
           template: ./adfsprojectosc97dev/ARMTemplateForFactory.json 
-          parameters: >
+          parameters: >-
             ./adfsprojectosc97dev/ARMTemplateParametersForFactory.json
             factoryName="adfsprojectosc97prod"
             
