@@ -38,6 +38,14 @@
 						"credential_": {
 							"value": "@activity('GetConfig').output.firstRow.credential_",
 							"type": "Expression"
+						},
+						"catalogo": {
+							"value": "@activity('GetConfig').output.firstRow.catalogo",
+							"type": "Expression"
+						},
+						"path": {
+							"value": "@activity('GetConfig').output.firstRow.path",
+							"type": "Expression"
 						}
 					}
 				},
@@ -77,11 +85,13 @@
 					},
 					"baseParameters": {
 						"storageName": {
-							"value": "@activity('GetConfig').output.value[0].storageName",
+							"value": "@activity('GetConfig').output.firstRow.storageName\n",
 							"type": "Expression"
 						},
 						"schemaBronze": "bronze",
-						"schemaSilver": "silver"
+						"schemaSilver": "silver",
+						"catalogo": "@activity('GetConfig').output.firstRow.catalogo",
+						"path": "@activity('GetConfig').output.firstRow.path"
 					}
 				},
 				"linkedServiceName": {
@@ -120,11 +130,19 @@
 					},
 					"baseParameters": {
 						"storageName": {
-							"value": "@activity('GetConfig').output.value[0].storageName",
+							"value": "@activity('GetConfig').output.firstRow.storageName\n",
 							"type": "Expression"
 						},
 						"schemaBronze": "bronze",
-						"schemaSilver": "silver"
+						"schemaSilver": "silver",
+						"catalogo": {
+							"value": "@activity('GetConfig').output.firstRow.catalogo",
+							"type": "Expression"
+						},
+						"path": {
+							"value": "@activity('GetConfig').output.firstRow.path",
+							"type": "Expression"
+						}
 					}
 				},
 				"linkedServiceName": {
@@ -163,11 +181,13 @@
 					},
 					"baseParameters": {
 						"storageName": {
-							"value": "@activity('GetConfig').output.value[0].storageName",
+							"value": "@activity('GetConfig').output.firstRow.storageName\n",
 							"type": "Expression"
 						},
 						"schemaBronze": "bronze",
-						"schemaSilver": "silver"
+						"schemaSilver": "silver",
+						"catalogo": "@activity('GetConfig').output.firstRow.catalogo",
+						"path": "@activity('GetConfig').output.firstRow.path"
 					}
 				},
 				"linkedServiceName": {
@@ -206,7 +226,9 @@
 					},
 					"baseParameters": {
 						"schemaBronze": "bronze",
-						"schemaSilver": "silver"
+						"schemaSilver": "silver",
+						"catalogo": "@activity('GetConfig').output.firstRow.catalogo",
+						"path": "@activity('GetConfig').output.firstRow.path"
 					}
 				},
 				"linkedServiceName": {
@@ -245,7 +267,12 @@
 					},
 					"baseParameters": {
 						"schemaBronze": "bronze",
-						"schemaSilver": "silver"
+						"schemaSilver": "silver",
+						"catalogo": {
+							"value": "@activity('GetConfig').output.firstRow.catalogo",
+							"type": "Expression"
+						},
+						"path": "@activity('GetConfig').output.firstRow.path"
 					}
 				},
 				"linkedServiceName": {
@@ -284,7 +311,12 @@
 					},
 					"baseParameters": {
 						"schemaBronze": "bronze",
-						"schemaSilver": "silver"
+						"schemaSilver": "silver",
+						"catalogo": {
+							"value": "@activity('GetConfig').output.firstRow.catalogo",
+							"type": "Expression"
+						},
+						"path": "@activity('GetConfig').output.firstRow.path"
 					}
 				},
 				"linkedServiceName": {
@@ -334,7 +366,9 @@
 						"type": "Expression"
 					},
 					"baseParameters": {
-						"schemaSilver": "silver"
+						"schemaSilver": "silver",
+						"catalogo": "@activity('GetConfig').output.firstRow.catalogo",
+						"path": "@activity('GetConfig').output.firstRow.path"
 					}
 				},
 				"linkedServiceName": {
@@ -373,7 +407,9 @@
 					},
 					"baseParameters": {
 						"schemaGold": "gold",
-						"schemaSilver": "silver"
+						"schemaSilver": "silver",
+						"catalogo": "@activity('GetConfig').output.firstRow.catalogo",
+						"path": "@activity('GetConfig').output.firstRow.path"
 					}
 				},
 				"linkedServiceName": {
@@ -417,21 +453,6 @@
 				}
 			}
 		],
-		"parameters": {
-			"catalogo": {
-				"type": "string",
-				"defaultValue": "project_dev"
-			},
-			"path": {
-				"type": "string",
-				"defaultValue": "/Users/duque.smart1397@outlook.com/CICD-Databricks/Proceso/"
-			}
-		},
-		"variables": {
-			"test": {
-				"type": "String"
-			}
-		},
 		"annotations": [],
 		"lastPublishTime": "2026-04-15T01:01:07Z"
 	},
