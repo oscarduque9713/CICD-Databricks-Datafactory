@@ -31,8 +31,4 @@ jobs:
           parameters: >-
             ./adfsprojectosc97dev/ARMTemplateParametersForFactory.json
             factoryName="adfsprojectosc97prod"
-            ls_adb_prod_properties_typeProperties_existingClusterId="0414-175402-ycrjrf77"
-            PP_PROECT_OSCAR_DEV_properties_parameters_path_defaultValue="/Workspace/Users/duque.smart1397@outlook.com/deploy/"
-            PP_PROECT_OSCAR_DEV_properties_parameters_catalogo_defaultValue="project_prod"
-            PP_PROECT_OSCAR_DEV_properties_parameters_storageName_defaultValue="adlssmartproject13prod"
-            PP_PROECT_OSCAR_DEV_properties_parameters_credential__defaultValue="credential_prod"
+            dls_con_properties_typeProperties_storageAccountUrl="https://adlssmartproject13prod.dfs.core.windows.net/"
