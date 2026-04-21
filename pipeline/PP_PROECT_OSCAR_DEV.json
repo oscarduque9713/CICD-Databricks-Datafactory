@@ -24,10 +24,6 @@
 						"schemaGold": "gold",
 						"credential_": "credential_dev"
 					}
-				},
-				"linkedServiceName": {
-					"referenceName": "ls_adb_dev",
-					"type": "LinkedServiceReference"
 				}
 			},
 			{
@@ -55,10 +51,6 @@
 						"storageName": "adlssmartprojectdev13",
 						"container": "raw"
 					}
-				},
-				"linkedServiceName": {
-					"referenceName": "ls_adb_dev",
-					"type": "LinkedServiceReference"
 				}
 			},
 			{
@@ -87,10 +79,6 @@
 						"schemaBronze": "bronze",
 						"schemaSilver": "silver"
 					}
-				},
-				"linkedServiceName": {
-					"referenceName": "ls_adb_dev",
-					"type": "LinkedServiceReference"
 				}
 			},
 			{
@@ -119,10 +107,6 @@
 						"schemaBronze": "bronze",
 						"schemaSilver": "silver"
 					}
-				},
-				"linkedServiceName": {
-					"referenceName": "ls_adb_dev",
-					"type": "LinkedServiceReference"
 				}
 			},
 			{
@@ -151,10 +135,6 @@
 						"schemaBronze": "bronze",
 						"schemaSilver": "silver"
 					}
-				},
-				"linkedServiceName": {
-					"referenceName": "ls_adb_dev",
-					"type": "LinkedServiceReference"
 				}
 			},
 			{
@@ -182,10 +162,6 @@
 						"schemaBronze": "bronze",
 						"schemaSilver": "silver"
 					}
-				},
-				"linkedServiceName": {
-					"referenceName": "ls_adb_dev",
-					"type": "LinkedServiceReference"
 				}
 			},
 			{
@@ -213,10 +189,6 @@
 						"schemaBronze": "bronze",
 						"schemaSilver": "silver"
 					}
-				},
-				"linkedServiceName": {
-					"referenceName": "ls_adb_dev",
-					"type": "LinkedServiceReference"
 				}
 			},
 			{
@@ -244,10 +216,6 @@
 						"schemaBronze": "bronze",
 						"schemaSilver": "silver"
 					}
-				},
-				"linkedServiceName": {
-					"referenceName": "ls_adb_dev",
-					"type": "LinkedServiceReference"
 				}
 			},
 			{
@@ -286,10 +254,6 @@
 					"baseParameters": {
 						"schemaSilver": "silver"
 					}
-				},
-				"linkedServiceName": {
-					"referenceName": "ls_adb_dev",
-					"type": "LinkedServiceReference"
 				}
 			},
 			{
@@ -317,10 +281,6 @@
 						"schemaGold": "gold",
 						"schemaSilver": "silver"
 					}
-				},
-				"linkedServiceName": {
-					"referenceName": "ls_adb_dev",
-					"type": "LinkedServiceReference"
 				}
 			}
 		],
@@ -328,6 +288,10 @@
 			"catalogo": {
 				"type": "string",
 				"defaultValue": "project_dev"
+			},
+			"linked_service": {
+				"type": "string",
+				"defaultValue": "ls_adb_dev"
 			}
 		},
 		"variables": {
