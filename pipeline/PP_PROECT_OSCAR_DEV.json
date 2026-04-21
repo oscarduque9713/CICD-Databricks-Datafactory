@@ -426,10 +426,6 @@
 				"type": "string",
 				"defaultValue": "/Users/duque.smart1397@outlook.com/CICD-Databricks/Proceso/"
 			},
-			"storageName": {
-				"type": "string",
-				"defaultValue": "adlssmartprojectdev13"
-			},
 			"credential_": {
 				"type": "string",
 				"defaultValue": "credential_dev"
