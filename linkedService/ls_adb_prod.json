@@ -4,16 +4,16 @@
 		"annotations": [],
 		"type": "AzureDatabricks",
 		"typeProperties": {
-			"domain": "https://adb-7405611378919410.10.azuredatabricks.net",
+			"domain": "https://adb-7405618610925729.9.azuredatabricks.net",
 			"accessToken": {
 				"type": "AzureKeyVaultSecret",
 				"store": {
 					"referenceName": "akvdev",
 					"type": "LinkedServiceReference"
 				},
-				"secretName": "kvtokendbtprod"
+				"secretName": "kvtokendtb"
 			},
-			"existingClusterId": "0414-175402-ycrjrf77"
+			"existingClusterId": "0409-155234-i86h65ts"
 		}
 	}
 }
