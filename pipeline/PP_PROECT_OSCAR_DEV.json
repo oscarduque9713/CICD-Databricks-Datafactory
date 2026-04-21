@@ -39,50 +39,11 @@
 				}
 			},
 			{
-				"name": "Download_Data",
-				"type": "DatabricksNotebook",
-				"dependsOn": [
-					{
-						"activity": "Prep_Amb",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
-				"policy": {
-					"timeout": "0.12:00:00",
-					"retry": 1,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"notebookPath": {
-						"value": "@concat( pipeline().parameters.path, '1.Download_Raw_Data')",
-						"type": "Expression"
-					},
-					"baseParameters": {
-						"storageName": "adlssmartprojectdev13",
-						"container": "raw"
-					}
-				},
-				"linkedServiceName": {
-					"referenceName": "ls_adb_dev",
-					"type": "LinkedServiceReference",
-					"parameters": {
-						"domain": "https://adb-7405618610925729.9.azuredatabricks.net",
-						"secretname": "kvtokendtb",
-						"cluster": "0409-155234-i86h65ts"
-					}
-				}
-			},
-			{
 				"name": "Ingest_Orders",
 				"type": "DatabricksNotebook",
 				"dependsOn": [
 					{
-						"activity": "Download_Data",
+						"activity": "Prep_Amb",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -122,7 +83,7 @@
 				"type": "DatabricksNotebook",
 				"dependsOn": [
 					{
-						"activity": "Download_Data",
+						"activity": "Prep_Amb",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -162,7 +123,7 @@
 				"type": "DatabricksNotebook",
 				"dependsOn": [
 					{
-						"activity": "Download_Data",
+						"activity": "Prep_Amb",
 						"dependencyConditions": [
 							"Succeeded"
 						]
