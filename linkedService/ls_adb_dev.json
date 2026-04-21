@@ -25,9 +25,9 @@
 					"referenceName": "akvdev",
 					"type": "LinkedServiceReference"
 				},
-				"secretName": "kvtokendtb"
+				"secretName": "@secretname"
 			},
-			"existingClusterId": "0409-155234-i86h65ts"
+			"existingClusterId": "@cluster"
 		}
 	}
 }
