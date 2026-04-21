@@ -1,6 +1,12 @@
 {
 	"name": "dls_con",
 	"properties": {
+		"parameters": {
+			"storage": {
+				"type": "string",
+				"defaultValue": "storagesecretdev"
+			}
+		},
 		"annotations": [],
 		"type": "AzureBlobFS",
 		"typeProperties": {
@@ -11,7 +17,10 @@
 					"referenceName": "akvdev",
 					"type": "LinkedServiceReference"
 				},
-				"secretName": "storagesecretdev"
+				"secretName": {
+					"value": "@linkedService().storage",
+					"type": "Expression"
+				}
 			}
 		}
 	},
