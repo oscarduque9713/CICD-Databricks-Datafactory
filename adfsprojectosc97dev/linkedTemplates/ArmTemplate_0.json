@@ -19,6 +19,10 @@
 			"type": "string",
 			"defaultValue": "adlssmartprojectdev13"
 		},
+		"PP_PROECT_OSCAR_DEV_properties_parameters_credential__defaultValue": {
+			"type": "string",
+			"defaultValue": "credential_dev"
+		},
 		"akvdev_properties_typeProperties_baseUrl": {
 			"type": "string",
 			"defaultValue": "https://kvprojectosc13.vault.azure.net/"
@@ -428,6 +432,10 @@
 					"storageName": {
 						"type": "string",
 						"defaultValue": "[parameters('PP_PROECT_OSCAR_DEV_properties_parameters_storageName_defaultValue')]"
+					},
+					"credential_": {
+						"type": "string",
+						"defaultValue": "[parameters('PP_PROECT_OSCAR_DEV_properties_parameters_credential__defaultValue')]"
 					}
 				},
 				"variables": {

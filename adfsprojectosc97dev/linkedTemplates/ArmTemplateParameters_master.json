@@ -14,6 +14,9 @@
 		"PP_PROECT_OSCAR_DEV_properties_parameters_storageName_defaultValue": {
 			"value": "adlssmartprojectdev13"
 		},
+		"PP_PROECT_OSCAR_DEV_properties_parameters_credential__defaultValue": {
+			"value": "credential_dev"
+		},
 		"akvdev_properties_typeProperties_baseUrl": {
 			"value": "https://kvprojectosc13.vault.azure.net/"
 		},
