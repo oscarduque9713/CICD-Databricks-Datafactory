@@ -33,3 +33,6 @@ jobs:
             factoryName="PP_PROJECT_DATA_FACTORY_PROD"
             PP_PROECT_OSCAR_DEV_properties_parameters_linked_service_defaultValue="ls_adb_prod"
             PP_PROECT_OSCAR_DEV_properties_parameters_base_path_defaultValue="/Workspace/Users/duque.smart1397@outlook.com/deploy/"
+            ls_adb_dev_properties_typeProperties_domain="https://adb-7405611378919410.10.azuredatabricks.net"
+            ls_adb_dev_properties_typeProperties_cluster="0414-175402-ycrjrf77"
+            ls_adb_dev_properties_typeProperties_secretname="kvtokendbtprod"
