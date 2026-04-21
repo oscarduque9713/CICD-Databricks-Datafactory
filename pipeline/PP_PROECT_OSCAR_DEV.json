@@ -377,6 +377,10 @@
 			"storageName": {
 				"type": "string",
 				"defaultValue": "adlssmartprojectdev13"
+			},
+			"credential_": {
+				"type": "string",
+				"defaultValue": "credential_dev"
 			}
 		},
 		"variables": {
