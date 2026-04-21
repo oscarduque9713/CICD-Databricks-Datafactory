@@ -30,6 +30,6 @@ jobs:
           template: ./adfsprojectosc97dev/ARMTemplateForFactory.json 
           parameters: >
             ./adfsprojectosc97dev/ARMTemplateParametersForFactory.json
-            factoryName="PP_PROJECT_DATA_FACTORY_PROD"
+            factoryName="adfsprojectosc97prod"
             akvdev_properties_typeProperties_baseUrl="/Workspace/Users/duque.smart1397@outlook.com/deploy/"
             ls_adb_prod_properties_typeProperties_existingClusterId="0414-175402-ycrjrf77"
