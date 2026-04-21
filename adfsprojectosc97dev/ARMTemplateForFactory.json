@@ -72,7 +72,7 @@
 							},
 							"baseParameters": {
 								"storageName": {
-									"value": "@activity('GetConfig').output.value[0].storageName\n\n",
+									"value": "@activity('GetConfig').output.firstRow.storageName\n",
 									"type": "Expression"
 								},
 								"container": "raw",
@@ -80,7 +80,7 @@
 								"schemaSilver": "silver",
 								"schemaGold": "gold",
 								"credential_": {
-									"value": "@activity('GetConfig').output.value[0].credential_",
+									"value": "@activity('GetConfig').output.firstRow.credential_",
 									"type": "Expression"
 								}
 							}
