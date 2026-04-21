@@ -16,7 +16,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"notebookPath": {
-						"value": "@concat( pipeline().parameters.base_path, '0.Preparacion_Ambiente')",
+						"value": "@concat( pipeline().parameters.path, '0.Preparacion_Ambiente')",
 						"type": "Expression"
 					},
 					"baseParameters": {
@@ -50,7 +50,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"notebookPath": {
-						"value": "@concat( pipeline().parameters.base_path, '1.Download_Raw_Data')",
+						"value": "@concat( pipeline().parameters.path, '1.Download_Raw_Data')",
 						"type": "Expression"
 					},
 					"baseParameters": {
@@ -111,7 +111,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"notebookPath": {
-						"value": "@concat( pipeline().parameters.base_path, '2.Ingest_Products')",
+						"value": "@concat( pipeline().parameters.path, '2.Ingest_Products')",
 						"type": "Expression"
 					},
 					"baseParameters": {
@@ -142,7 +142,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"notebookPath": {
-						"value": "@concat( pipeline().parameters.base_path, '2.Ingest_Sellers_Customers')",
+						"value": "@concat( pipeline().parameters.path, '2.Ingest_Sellers_Customers')",
 						"type": "Expression"
 					},
 					"baseParameters": {
@@ -173,7 +173,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"notebookPath": {
-						"value": "@concat( pipeline().parameters.base_path, '3.Transform_Orders')",
+						"value": "@concat( pipeline().parameters.path, '3.Transform_Orders')",
 						"type": "Expression"
 					},
 					"baseParameters": {
@@ -203,7 +203,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"notebookPath": {
-						"value": "@concat( pipeline().parameters.base_path, '3.Transform_Products')",
+						"value": "@concat( pipeline().parameters.path, '3.Transform_Products')",
 						"type": "Expression"
 					},
 					"baseParameters": {
@@ -233,7 +233,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"notebookPath": {
-						"value": "@concat( pipeline().parameters.base_path, '3.Transform_Customers_Sellers')",
+						"value": "@concat( pipeline().parameters.path, '3.Transform_Customers_Sellers')",
 						"type": "Expression"
 					},
 					"baseParameters": {
@@ -275,7 +275,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"notebookPath": {
-						"value": "@concat( pipeline().parameters.base_path, '4.Transform_Orders_end')",
+						"value": "@concat( pipeline().parameters.path, '4.Transform_Orders_end')",
 						"type": "Expression"
 					},
 					"baseParameters": {
@@ -304,7 +304,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"notebookPath": {
-						"value": "@concat( pipeline().parameters.base_path, '5.Load_orders')",
+						"value": "@concat( pipeline().parameters.path, '5.Load_orders')",
 						"type": "Expression"
 					},
 					"baseParameters": {
