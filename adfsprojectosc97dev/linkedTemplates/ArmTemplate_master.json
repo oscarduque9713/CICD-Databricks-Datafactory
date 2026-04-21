@@ -7,25 +7,9 @@
 			"metadata": "Data Factory name",
 			"defaultValue": "adfsprojectosc97dev"
 		},
-		"PP_PROECT_OSCAR_DEV_properties_parameters_catalogo_defaultValue": {
-			"type": "string",
-			"defaultValue": "project_dev"
-		},
-		"PP_PROECT_OSCAR_DEV_properties_parameters_path_defaultValue": {
-			"type": "string",
-			"defaultValue": "/Users/duque.smart1397@outlook.com/CICD-Databricks/Proceso/"
-		},
 		"akvdev_properties_typeProperties_baseUrl": {
 			"type": "string",
 			"defaultValue": "https://kvprojectosc13.vault.azure.net/"
-		},
-		"ls_adb_prod_properties_typeProperties_domain": {
-			"type": "string",
-			"defaultValue": "https://adb-7405618610925729.9.azuredatabricks.net"
-		},
-		"ls_adb_prod_properties_typeProperties_existingClusterId": {
-			"type": "string",
-			"defaultValue": "0409-155234-i86h65ts"
 		},
 		"ls_adb_dev_properties_typeProperties_domain": {
 			"type": "string",
@@ -34,6 +18,14 @@
 		"ls_adb_dev_properties_typeProperties_existingClusterId": {
 			"type": "string",
 			"defaultValue": "@linkedService().cluster"
+		},
+		"ls_adb_prod_properties_typeProperties_domain": {
+			"type": "string",
+			"defaultValue": "https://adb-7405618610925729.9.azuredatabricks.net"
+		},
+		"ls_adb_prod_properties_typeProperties_existingClusterId": {
+			"type": "string",
+			"defaultValue": "0409-155234-i86h65ts"
 		},
 		"containerUri": {
 			"type": "string",
@@ -65,23 +57,17 @@
 					"akvdev_properties_typeProperties_baseUrl": {
 						"value": "[parameters('akvdev_properties_typeProperties_baseUrl')]"
 					},
-					"ls_adb_prod_properties_typeProperties_domain": {
-						"value": "[parameters('ls_adb_prod_properties_typeProperties_domain')]"
-					},
-					"ls_adb_prod_properties_typeProperties_existingClusterId": {
-						"value": "[parameters('ls_adb_prod_properties_typeProperties_existingClusterId')]"
-					},
 					"ls_adb_dev_properties_typeProperties_domain": {
 						"value": "[parameters('ls_adb_dev_properties_typeProperties_domain')]"
 					},
 					"ls_adb_dev_properties_typeProperties_existingClusterId": {
 						"value": "[parameters('ls_adb_dev_properties_typeProperties_existingClusterId')]"
 					},
-					"PP_PROECT_OSCAR_DEV_properties_parameters_catalogo_defaultValue": {
-						"value": "[parameters('PP_PROECT_OSCAR_DEV_properties_parameters_catalogo_defaultValue')]"
+					"ls_adb_prod_properties_typeProperties_domain": {
+						"value": "[parameters('ls_adb_prod_properties_typeProperties_domain')]"
 					},
-					"PP_PROECT_OSCAR_DEV_properties_parameters_path_defaultValue": {
-						"value": "[parameters('PP_PROECT_OSCAR_DEV_properties_parameters_path_defaultValue')]"
+					"ls_adb_prod_properties_typeProperties_existingClusterId": {
+						"value": "[parameters('ls_adb_prod_properties_typeProperties_existingClusterId')]"
 					}
 				}
 			},

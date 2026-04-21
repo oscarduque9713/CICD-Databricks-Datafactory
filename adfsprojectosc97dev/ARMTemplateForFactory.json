@@ -7,25 +7,9 @@
 			"metadata": "Data Factory name",
 			"defaultValue": "adfsprojectosc97dev"
 		},
-		"PP_PROECT_OSCAR_DEV_properties_parameters_catalogo_defaultValue": {
-			"type": "string",
-			"defaultValue": "project_dev"
-		},
-		"PP_PROECT_OSCAR_DEV_properties_parameters_path_defaultValue": {
-			"type": "string",
-			"defaultValue": "/Users/duque.smart1397@outlook.com/CICD-Databricks/Proceso/"
-		},
 		"akvdev_properties_typeProperties_baseUrl": {
 			"type": "string",
 			"defaultValue": "https://kvprojectosc13.vault.azure.net/"
-		},
-		"ls_adb_prod_properties_typeProperties_domain": {
-			"type": "string",
-			"defaultValue": "https://adb-7405618610925729.9.azuredatabricks.net"
-		},
-		"ls_adb_prod_properties_typeProperties_existingClusterId": {
-			"type": "string",
-			"defaultValue": "0409-155234-i86h65ts"
 		},
 		"ls_adb_dev_properties_typeProperties_domain": {
 			"type": "string",
@@ -34,6 +18,14 @@
 		"ls_adb_dev_properties_typeProperties_existingClusterId": {
 			"type": "string",
 			"defaultValue": "@linkedService().cluster"
+		},
+		"ls_adb_prod_properties_typeProperties_domain": {
+			"type": "string",
+			"defaultValue": "https://adb-7405618610925729.9.azuredatabricks.net"
+		},
+		"ls_adb_prod_properties_typeProperties_existingClusterId": {
+			"type": "string",
+			"defaultValue": "0409-155234-i86h65ts"
 		}
 	},
 	"variables": {
@@ -67,7 +59,7 @@
 						"userProperties": [],
 						"typeProperties": {
 							"notebookPath": {
-								"value": "@concat( pipeline().parameters.path, '0.Preparacion_Ambiente')",
+								"value": "@concat( activity('GetConfig').output.firstRow.path, '0.Preparacion_Ambiente')",
 								"type": "Expression"
 							},
 							"baseParameters": {
@@ -81,6 +73,10 @@
 								"schemaGold": "gold",
 								"credential_": {
 									"value": "@activity('GetConfig').output.firstRow.credential_",
+									"type": "Expression"
+								},
+								"catalogo": {
+									"value": "@activity('GetConfig').output.firstRow.catalogo",
 									"type": "Expression"
 								}
 							}
@@ -116,16 +112,20 @@
 						"userProperties": [],
 						"typeProperties": {
 							"notebookPath": {
-								"value": "@concat( pipeline().parameters.path, '2.Ingest_Orders')",
+								"value": "@concat( activity('GetConfig').output.firstRow.path, '2.Ingest_Orders')",
 								"type": "Expression"
 							},
 							"baseParameters": {
 								"storageName": {
-									"value": "@activity('GetConfig').output.value[0].storageName",
+									"value": "@activity('GetConfig').output.firstRow.storageName\n",
 									"type": "Expression"
 								},
 								"schemaBronze": "bronze",
-								"schemaSilver": "silver"
+								"schemaSilver": "silver",
+								"catalogo": {
+									"value": "@activity('GetConfig').output.firstRow.catalogo",
+									"type": "Expression"
+								}
 							}
 						},
 						"linkedServiceName": {
@@ -159,16 +159,20 @@
 						"userProperties": [],
 						"typeProperties": {
 							"notebookPath": {
-								"value": "@concat( pipeline().parameters.path, '2.Ingest_Products')",
+								"value": "@concat( activity('GetConfig').output.firstRow.path, '2.Ingest_Products')",
 								"type": "Expression"
 							},
 							"baseParameters": {
 								"storageName": {
-									"value": "@activity('GetConfig').output.value[0].storageName",
+									"value": "@activity('GetConfig').output.firstRow.storageName\n",
 									"type": "Expression"
 								},
 								"schemaBronze": "bronze",
-								"schemaSilver": "silver"
+								"schemaSilver": "silver",
+								"catalogo": {
+									"value": "@activity('GetConfig').output.firstRow.catalogo",
+									"type": "Expression"
+								}
 							}
 						},
 						"linkedServiceName": {
@@ -202,16 +206,20 @@
 						"userProperties": [],
 						"typeProperties": {
 							"notebookPath": {
-								"value": "@concat( pipeline().parameters.path, '2.Ingest_Sellers_Customers')",
+								"value": "@concat( activity('GetConfig').output.firstRow.path, '2.Ingest_Sellers_Customers')",
 								"type": "Expression"
 							},
 							"baseParameters": {
 								"storageName": {
-									"value": "@activity('GetConfig').output.value[0].storageName",
+									"value": "@activity('GetConfig').output.firstRow.storageName\n",
 									"type": "Expression"
 								},
 								"schemaBronze": "bronze",
-								"schemaSilver": "silver"
+								"schemaSilver": "silver",
+								"catalogo": {
+									"value": "@activity('GetConfig').output.firstRow.catalogo",
+									"type": "Expression"
+								}
 							}
 						},
 						"linkedServiceName": {
@@ -245,12 +253,16 @@
 						"userProperties": [],
 						"typeProperties": {
 							"notebookPath": {
-								"value": "@concat( pipeline().parameters.path, '3.Transform_Orders')",
+								"value": "@concat( activity('GetConfig').output.firstRow.path, '3.Transform_Orders')",
 								"type": "Expression"
 							},
 							"baseParameters": {
 								"schemaBronze": "bronze",
-								"schemaSilver": "silver"
+								"schemaSilver": "silver",
+								"catalogo": {
+									"value": "@activity('GetConfig').output.firstRow.catalogo",
+									"type": "Expression"
+								}
 							}
 						},
 						"linkedServiceName": {
@@ -284,12 +296,16 @@
 						"userProperties": [],
 						"typeProperties": {
 							"notebookPath": {
-								"value": "@concat( pipeline().parameters.path, '3.Transform_Products')",
+								"value": "@concat( activity('GetConfig').output.firstRow.path, '3.Transform_Products')",
 								"type": "Expression"
 							},
 							"baseParameters": {
 								"schemaBronze": "bronze",
-								"schemaSilver": "silver"
+								"schemaSilver": "silver",
+								"catalogo": {
+									"value": "@activity('GetConfig').output.firstRow.catalogo",
+									"type": "Expression"
+								}
 							}
 						},
 						"linkedServiceName": {
@@ -323,12 +339,16 @@
 						"userProperties": [],
 						"typeProperties": {
 							"notebookPath": {
-								"value": "@concat( pipeline().parameters.path, '3.Transform_Customers_Sellers')",
+								"value": "@concat( activity('GetConfig').output.firstRow.path, '3.Transform_Customers_Sellers')",
 								"type": "Expression"
 							},
 							"baseParameters": {
 								"schemaBronze": "bronze",
-								"schemaSilver": "silver"
+								"schemaSilver": "silver",
+								"catalogo": {
+									"value": "@activity('GetConfig').output.firstRow.catalogo",
+									"type": "Expression"
+								}
 							}
 						},
 						"linkedServiceName": {
@@ -374,11 +394,15 @@
 						"userProperties": [],
 						"typeProperties": {
 							"notebookPath": {
-								"value": "@concat( pipeline().parameters.path, '4.Transform_Orders_end')",
+								"value": "@concat( activity('GetConfig').output.firstRow.path, '4.Transform_Orders_end')",
 								"type": "Expression"
 							},
 							"baseParameters": {
-								"schemaSilver": "silver"
+								"schemaSilver": "silver",
+								"catalogo": {
+									"value": "@activity('GetConfig').output.firstRow.catalogo",
+									"type": "Expression"
+								}
 							}
 						},
 						"linkedServiceName": {
@@ -412,12 +436,16 @@
 						"userProperties": [],
 						"typeProperties": {
 							"notebookPath": {
-								"value": "@concat( pipeline().parameters.path, '5.Load_orders')",
+								"value": "@concat( activity('GetConfig').output.firstRow.path, '5.Load_orders')",
 								"type": "Expression"
 							},
 							"baseParameters": {
 								"schemaGold": "gold",
-								"schemaSilver": "silver"
+								"schemaSilver": "silver",
+								"catalogo": {
+									"value": "@activity('GetConfig').output.firstRow.catalogo",
+									"type": "Expression"
+								}
 							}
 						},
 						"linkedServiceName": {
@@ -465,27 +493,48 @@
 				"policy": {
 					"elapsedTimeMetric": {}
 				},
-				"parameters": {
-					"catalogo": {
-						"type": "string",
-						"defaultValue": "[parameters('PP_PROECT_OSCAR_DEV_properties_parameters_catalogo_defaultValue')]"
-					},
-					"path": {
-						"type": "string",
-						"defaultValue": "[parameters('PP_PROECT_OSCAR_DEV_properties_parameters_path_defaultValue')]"
-					}
-				},
-				"variables": {
-					"test": {
-						"type": "String"
-					}
-				},
 				"annotations": [],
 				"lastPublishTime": "2026-04-15T01:01:07Z"
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/ls_adb_dev')]",
 				"[concat(variables('factoryId'), '/datasets/configParameter')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/configParameter')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "dls_con",
+					"type": "LinkedServiceReference",
+					"parameters": {
+						"storage": "storagesecretdev"
+					}
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": "config.csv",
+						"fileSystem": "parameters"
+					},
+					"columnDelimiter": ";",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "path;catalogo;storageName;cluster_id;credential_;domain;secretname;cluster",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/dls_con')]"
 			]
 		},
 		{
@@ -502,23 +551,31 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/ls_adb_prod')]",
+			"name": "[concat(parameters('factoryName'), '/dls_con')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
 			"properties": {
+				"parameters": {
+					"storage": {
+						"type": "string",
+						"defaultValue": "storagesecretdev"
+					}
+				},
 				"annotations": [],
-				"type": "AzureDatabricks",
+				"type": "AzureBlobFS",
 				"typeProperties": {
-					"domain": "[parameters('ls_adb_prod_properties_typeProperties_domain')]",
-					"accessToken": {
+					"url": "https://adlssmartprojectdev13.dfs.core.windows.net/",
+					"accountKey": {
 						"type": "AzureKeyVaultSecret",
 						"store": {
 							"referenceName": "akvdev",
 							"type": "LinkedServiceReference"
 						},
-						"secretName": "kvtokendtb"
-					},
-					"existingClusterId": "[parameters('ls_adb_prod_properties_typeProperties_existingClusterId')]"
+						"secretName": {
+							"value": "@linkedService().storage",
+							"type": "Expression"
+						}
+					}
 				}
 			},
 			"dependsOn": [
@@ -567,68 +624,27 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/dls_con')]",
+			"name": "[concat(parameters('factoryName'), '/ls_adb_prod')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
 			"properties": {
-				"parameters": {
-					"storage": {
-						"type": "string",
-						"defaultValue": "storagesecretdev"
-					}
-				},
 				"annotations": [],
-				"type": "AzureBlobFS",
+				"type": "AzureDatabricks",
 				"typeProperties": {
-					"url": "https://adlssmartprojectdev13.dfs.core.windows.net/",
-					"accountKey": {
+					"domain": "[parameters('ls_adb_prod_properties_typeProperties_domain')]",
+					"accessToken": {
 						"type": "AzureKeyVaultSecret",
 						"store": {
 							"referenceName": "akvdev",
 							"type": "LinkedServiceReference"
 						},
-						"secretName": {
-							"value": "@linkedService().storage",
-							"type": "Expression"
-						}
-					}
+						"secretName": "kvtokendtb"
+					},
+					"existingClusterId": "[parameters('ls_adb_prod_properties_typeProperties_existingClusterId')]"
 				}
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/akvdev')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/configParameter')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "dls_con",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "DelimitedText",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobFSLocation",
-						"fileName": "config.csv",
-						"fileSystem": "parameters"
-					},
-					"columnDelimiter": ";",
-					"escapeChar": "\\",
-					"firstRowAsHeader": true,
-					"quoteChar": "\""
-				},
-				"schema": [
-					{
-						"name": "path;catalogo;storageName;cluster_id;credential_;domain;secretname;cluster",
-						"type": "String"
-					}
-				]
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/dls_con')]"
 			]
 		}
 	]
