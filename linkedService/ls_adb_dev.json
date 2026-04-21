@@ -1,6 +1,20 @@
 {
 	"name": "ls_adb_dev",
 	"properties": {
+		"parameters": {
+			"domain": {
+				"type": "string",
+				"defaultValue": "https://adb-7405618610925729.9.azuredatabricks.net"
+			},
+			"secretname": {
+				"type": "string",
+				"defaultValue": "kvtokendtb"
+			},
+			"cluster": {
+				"type": "string",
+				"defaultValue": "0409-155234-i86h65ts"
+			}
+		},
 		"annotations": [],
 		"type": "AzureDatabricks",
 		"typeProperties": {
