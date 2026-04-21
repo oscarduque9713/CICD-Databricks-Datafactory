@@ -27,7 +27,7 @@ jobs:
         with:
           resourceGroupName: ${{ secrets.RG_NAME }} # Asegúrate de tener este secreto
           # Ajusta la ruta si tu carpeta tiene un nombre específico
-          template: ./TU_NOMBRE_ADF/ARMTemplateForFactory.json 
+          template: ./adfsprojectosc97dev/ARMTemplateForFactory.json 
           parameters: >
             ./adfsprojectosc97dev/ARMTemplateParametersForFactory.json
             factoryName="PP_PROJECT_DATA_FACTORY_PROD"
