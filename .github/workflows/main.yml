@@ -1,1 +1,15 @@
-## prueba
+name: CICD-Databricks-Datafactory
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  id-token: write
+  contents: read
+
+"PP_PROECT_OSCAR_DEV_properties_parameters_linked_service_defaultValue": {
+    "value": "ls_adb_prod" 
+}
+
