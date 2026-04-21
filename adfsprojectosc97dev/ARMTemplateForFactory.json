@@ -11,9 +11,13 @@
 			"type": "string",
 			"defaultValue": "https://kvprojectosc13.vault.azure.net/"
 		},
+		"ls_adb_prod_properties_typeProperties_existingClusterId": {
+			"type": "string",
+			"defaultValue": "0414-175402-ycrjrf77"
+		},
 		"ls_adb_dev_properties_typeProperties_existingClusterId": {
 			"type": "string",
-			"defaultValue": "0409-155234-i86h65ts"
+			"defaultValue": "@cluster"
 		}
 	},
 	"variables": {
@@ -34,21 +38,62 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/ls_adb_dev')]",
+			"name": "[concat(parameters('factoryName'), '/ls_adb_prod')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"annotations": [],
 				"type": "AzureDatabricks",
 				"typeProperties": {
-					"domain": "https://adb-7405618610925729.9.azuredatabricks.net",
+					"domain": "https://adb-7405611378919410.10.azuredatabricks.net",
 					"accessToken": {
 						"type": "AzureKeyVaultSecret",
 						"store": {
 							"referenceName": "akvdev",
 							"type": "LinkedServiceReference"
 						},
-						"secretName": "kvtokendtb"
+						"secretName": "kvtokendbtprod"
+					},
+					"existingClusterId": "[parameters('ls_adb_prod_properties_typeProperties_existingClusterId')]"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/akvdev')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ls_adb_dev')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"parameters": {
+					"domain": {
+						"type": "string",
+						"defaultValue": "https://adb-7405618610925729.9.azuredatabricks.net"
+					},
+					"secretname": {
+						"type": "string",
+						"defaultValue": "kvtokendtb"
+					},
+					"cluster": {
+						"type": "string",
+						"defaultValue": "0409-155234-i86h65ts"
+					}
+				},
+				"annotations": [],
+				"type": "AzureDatabricks",
+				"typeProperties": {
+					"domain": "@domain",
+					"accessToken": {
+						"type": "AzureKeyVaultSecret",
+						"store": {
+							"referenceName": "akvdev",
+							"type": "LinkedServiceReference"
+						},
+						"secretName": {
+							"value": "@secretname",
+							"type": "Expression"
+						}
 					},
 					"existingClusterId": "[parameters('ls_adb_dev_properties_typeProperties_existingClusterId')]"
 				}
@@ -76,7 +121,10 @@
 						},
 						"userProperties": [],
 						"typeProperties": {
-							"notebookPath": "/Users/duque.smart1397@outlook.com/CICD-Databricks/PrepAmb/0.Preparacion_Ambiente",
+							"notebookPath": {
+								"value": "@concat( pipeline().parameters.path, '0.Preparacion_Ambiente')",
+								"type": "Expression"
+							},
 							"baseParameters": {
 								"storageName": "adlssmartprojectdev13",
 								"container": "raw",
@@ -88,7 +136,12 @@
 						},
 						"linkedServiceName": {
 							"referenceName": "ls_adb_dev",
-							"type": "LinkedServiceReference"
+							"type": "LinkedServiceReference",
+							"parameters": {
+								"domain": "https://adb-7405618610925729.9.azuredatabricks.net",
+								"secretname": "kvtokendtb",
+								"cluster": "0409-155234-i86h65ts"
+							}
 						}
 					},
 					{
@@ -111,7 +164,10 @@
 						},
 						"userProperties": [],
 						"typeProperties": {
-							"notebookPath": "/Users/duque.smart1397@outlook.com/CICD-Databricks/Proceso/1.Download_Raw_Data",
+							"notebookPath": {
+								"value": "@concat( pipeline().parameters.path, '1.Download_Raw_Data')",
+								"type": "Expression"
+							},
 							"baseParameters": {
 								"storageName": "adlssmartprojectdev13",
 								"container": "raw"
@@ -119,7 +175,12 @@
 						},
 						"linkedServiceName": {
 							"referenceName": "ls_adb_dev",
-							"type": "LinkedServiceReference"
+							"type": "LinkedServiceReference",
+							"parameters": {
+								"domain": "https://adb-7405618610925729.9.azuredatabricks.net",
+								"secretname": "kvtokendtb",
+								"cluster": "0409-155234-i86h65ts"
+							}
 						}
 					},
 					{
@@ -142,7 +203,10 @@
 						},
 						"userProperties": [],
 						"typeProperties": {
-							"notebookPath": "/Users/duque.smart1397@outlook.com/CICD-Databricks/Proceso/2.Ingest_Orders",
+							"notebookPath": {
+								"value": "@concat( pipeline().parameters.path, '2.Ingest_Orders')",
+								"type": "Expression"
+							},
 							"baseParameters": {
 								"storageName": "adlssmartprojectdev13",
 								"schemaBronze": "bronze",
@@ -151,7 +215,12 @@
 						},
 						"linkedServiceName": {
 							"referenceName": "ls_adb_dev",
-							"type": "LinkedServiceReference"
+							"type": "LinkedServiceReference",
+							"parameters": {
+								"domain": "https://adb-7405618610925729.9.azuredatabricks.net",
+								"secretname": "kvtokendtb",
+								"cluster": "0409-155234-i86h65ts"
+							}
 						}
 					},
 					{
@@ -174,7 +243,10 @@
 						},
 						"userProperties": [],
 						"typeProperties": {
-							"notebookPath": "/Users/duque.smart1397@outlook.com/CICD-Databricks/Proceso/2.Ingest_Products",
+							"notebookPath": {
+								"value": "@concat( pipeline().parameters.path, '2.Ingest_Products')",
+								"type": "Expression"
+							},
 							"baseParameters": {
 								"storageName": "adlssmartprojectdev13",
 								"schemaBronze": "bronze",
@@ -183,7 +255,12 @@
 						},
 						"linkedServiceName": {
 							"referenceName": "ls_adb_dev",
-							"type": "LinkedServiceReference"
+							"type": "LinkedServiceReference",
+							"parameters": {
+								"domain": "https://adb-7405618610925729.9.azuredatabricks.net",
+								"secretname": "kvtokendtb",
+								"cluster": "0409-155234-i86h65ts"
+							}
 						}
 					},
 					{
@@ -206,7 +283,10 @@
 						},
 						"userProperties": [],
 						"typeProperties": {
-							"notebookPath": "/Users/duque.smart1397@outlook.com/CICD-Databricks/Proceso/2.Ingest_Sellers_Customers",
+							"notebookPath": {
+								"value": "@concat( pipeline().parameters.path, '2.Ingest_Sellers_Customers')",
+								"type": "Expression"
+							},
 							"baseParameters": {
 								"storageName": "adlssmartprojectdev13",
 								"schemaBronze": "bronze",
@@ -215,7 +295,12 @@
 						},
 						"linkedServiceName": {
 							"referenceName": "ls_adb_dev",
-							"type": "LinkedServiceReference"
+							"type": "LinkedServiceReference",
+							"parameters": {
+								"domain": "https://adb-7405618610925729.9.azuredatabricks.net",
+								"secretname": "kvtokendtb",
+								"cluster": "0409-155234-i86h65ts"
+							}
 						}
 					},
 					{
@@ -238,7 +323,10 @@
 						},
 						"userProperties": [],
 						"typeProperties": {
-							"notebookPath": "/Users/duque.smart1397@outlook.com/CICD-Databricks/Proceso/3.Transform_Orders",
+							"notebookPath": {
+								"value": "@concat( pipeline().parameters.path, '3.Transform_Orders')",
+								"type": "Expression"
+							},
 							"baseParameters": {
 								"schemaBronze": "bronze",
 								"schemaSilver": "silver"
@@ -246,7 +334,12 @@
 						},
 						"linkedServiceName": {
 							"referenceName": "ls_adb_dev",
-							"type": "LinkedServiceReference"
+							"type": "LinkedServiceReference",
+							"parameters": {
+								"domain": "https://adb-7405618610925729.9.azuredatabricks.net",
+								"secretname": "kvtokendtb",
+								"cluster": "0409-155234-i86h65ts"
+							}
 						}
 					},
 					{
@@ -269,7 +362,10 @@
 						},
 						"userProperties": [],
 						"typeProperties": {
-							"notebookPath": "/Users/duque.smart1397@outlook.com/CICD-Databricks/Proceso/3.Transform_Products",
+							"notebookPath": {
+								"value": "@concat( pipeline().parameters.path, '3.Transform_Products')",
+								"type": "Expression"
+							},
 							"baseParameters": {
 								"schemaBronze": "bronze",
 								"schemaSilver": "silver"
@@ -277,7 +373,12 @@
 						},
 						"linkedServiceName": {
 							"referenceName": "ls_adb_dev",
-							"type": "LinkedServiceReference"
+							"type": "LinkedServiceReference",
+							"parameters": {
+								"domain": "https://adb-7405618610925729.9.azuredatabricks.net",
+								"secretname": "kvtokendtb",
+								"cluster": "0409-155234-i86h65ts"
+							}
 						}
 					},
 					{
@@ -300,7 +401,10 @@
 						},
 						"userProperties": [],
 						"typeProperties": {
-							"notebookPath": "/Users/duque.smart1397@outlook.com/CICD-Databricks/Proceso/3.Transform_Customers_Sellers",
+							"notebookPath": {
+								"value": "@concat( pipeline().parameters.path, '3.Transform_Customers_Sellers')",
+								"type": "Expression"
+							},
 							"baseParameters": {
 								"schemaBronze": "bronze",
 								"schemaSilver": "silver"
@@ -308,7 +412,12 @@
 						},
 						"linkedServiceName": {
 							"referenceName": "ls_adb_dev",
-							"type": "LinkedServiceReference"
+							"type": "LinkedServiceReference",
+							"parameters": {
+								"domain": "https://adb-7405618610925729.9.azuredatabricks.net",
+								"secretname": "kvtokendtb",
+								"cluster": "0409-155234-i86h65ts"
+							}
 						}
 					},
 					{
@@ -336,21 +445,29 @@
 						],
 						"policy": {
 							"timeout": "0.12:00:00",
-							"retry": 0,
+							"retry": 1,
 							"retryIntervalInSeconds": 30,
 							"secureOutput": false,
 							"secureInput": false
 						},
 						"userProperties": [],
 						"typeProperties": {
-							"notebookPath": "/Users/duque.smart1397@outlook.com/CICD-Databricks/Proceso/4.Transform_Orders_end",
+							"notebookPath": {
+								"value": "@concat( pipeline().parameters.path, '4.Transform_Orders_end')",
+								"type": "Expression"
+							},
 							"baseParameters": {
 								"schemaSilver": "silver"
 							}
 						},
 						"linkedServiceName": {
 							"referenceName": "ls_adb_dev",
-							"type": "LinkedServiceReference"
+							"type": "LinkedServiceReference",
+							"parameters": {
+								"domain": "https://adb-7405618610925729.9.azuredatabricks.net",
+								"secretname": "kvtokendtb",
+								"cluster": "0409-155234-i86h65ts"
+							}
 						}
 					},
 					{
@@ -366,14 +483,17 @@
 						],
 						"policy": {
 							"timeout": "0.12:00:00",
-							"retry": 0,
+							"retry": 1,
 							"retryIntervalInSeconds": 30,
 							"secureOutput": false,
 							"secureInput": false
 						},
 						"userProperties": [],
 						"typeProperties": {
-							"notebookPath": "/Users/duque.smart1397@outlook.com/CICD-Databricks/Proceso/5.Load_orders",
+							"notebookPath": {
+								"value": "@concat( pipeline().parameters.path, '5.Load_orders')",
+								"type": "Expression"
+							},
 							"baseParameters": {
 								"schemaGold": "gold",
 								"schemaSilver": "silver"
@@ -381,7 +501,12 @@
 						},
 						"linkedServiceName": {
 							"referenceName": "ls_adb_dev",
-							"type": "LinkedServiceReference"
+							"type": "LinkedServiceReference",
+							"parameters": {
+								"domain": "https://adb-7405618610925729.9.azuredatabricks.net",
+								"secretname": "kvtokendtb",
+								"cluster": "0409-155234-i86h65ts"
+							}
 						}
 					}
 				],
@@ -392,6 +517,19 @@
 					"catalogo": {
 						"type": "string",
 						"defaultValue": "project_dev"
+					},
+					"linked_service": {
+						"type": "string",
+						"defaultValue": "ls_adb_dev"
+					},
+					"path": {
+						"type": "string",
+						"defaultValue": "/Users/duque.smart1397@outlook.com/CICD-Databricks/Proceso/"
+					}
+				},
+				"variables": {
+					"test": {
+						"type": "String"
 					}
 				},
 				"annotations": [],

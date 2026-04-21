@@ -8,8 +8,11 @@
 		"akvdev_properties_typeProperties_baseUrl": {
 			"value": "https://kvprojectosc13.vault.azure.net/"
 		},
+		"ls_adb_prod_properties_typeProperties_existingClusterId": {
+			"value": "0414-175402-ycrjrf77"
+		},
 		"ls_adb_dev_properties_typeProperties_existingClusterId": {
-			"value": "0409-155234-i86h65ts"
+			"value": "@cluster"
 		},
 		"containerUri": {
 			"value": ""

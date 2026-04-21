@@ -11,9 +11,13 @@
 			"type": "string",
 			"defaultValue": "https://kvprojectosc13.vault.azure.net/"
 		},
+		"ls_adb_prod_properties_typeProperties_existingClusterId": {
+			"type": "string",
+			"defaultValue": "0414-175402-ycrjrf77"
+		},
 		"ls_adb_dev_properties_typeProperties_existingClusterId": {
 			"type": "string",
-			"defaultValue": "0409-155234-i86h65ts"
+			"defaultValue": "@cluster"
 		},
 		"containerUri": {
 			"type": "string",
@@ -44,6 +48,9 @@
 					},
 					"akvdev_properties_typeProperties_baseUrl": {
 						"value": "[parameters('akvdev_properties_typeProperties_baseUrl')]"
+					},
+					"ls_adb_prod_properties_typeProperties_existingClusterId": {
+						"value": "[parameters('ls_adb_prod_properties_typeProperties_existingClusterId')]"
 					},
 					"ls_adb_dev_properties_typeProperties_existingClusterId": {
 						"value": "[parameters('ls_adb_dev_properties_typeProperties_existingClusterId')]"
