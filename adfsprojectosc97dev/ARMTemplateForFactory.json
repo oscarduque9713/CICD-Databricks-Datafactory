@@ -83,7 +83,7 @@
 				"annotations": [],
 				"type": "AzureBlobFS",
 				"typeProperties": {
-					"url": "https://adlssmartprojectdev13.dfs.core.windows.net/",
+					"url": "[parameters('dls_con_properties_typeProperties_storageAccountUrl')]",
 					"accountKey": {
 						"type": "AzureKeyVaultSecret",
 						"store": {
@@ -91,7 +91,7 @@
 							"type": "LinkedServiceReference"
 						},
 						"secretName": {
-							"value": "@linkedService().storage",
+							"value": "[parameters('dls_con_properties_typeProperties_secretName')]",
 							"type": "Expression"
 						}
 					}
