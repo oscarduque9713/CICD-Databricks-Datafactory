@@ -137,7 +137,8 @@
 					"referenceName": "dls_con",
 					"type": "LinkedServiceReference",
 					"parameters": {
-						"storage": "storagesecretdev"
+						"storageAccountUrl": "[parameters('dls_con_properties_typeProperties_storageAccountUrl')]",
+                		"secretName": "[parameters('dls_con_properties_typeProperties_secretName')]"
 					}
 				},
 				"annotations": [],
