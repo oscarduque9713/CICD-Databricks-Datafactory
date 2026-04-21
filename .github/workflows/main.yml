@@ -31,5 +31,11 @@ jobs:
           parameters: >
             ./adfsprojectosc97dev/ARMTemplateParametersForFactory.json
             factoryName="adfsprojectosc97prod"
-            akvdev_properties_typeProperties_baseUrl="/Workspace/Users/duque.smart1397@outlook.com/deploy/"
+            # URL DEL KEY VAULT (Punto de acceso a secretos)
+            akvdev_properties_typeProperties_baseUrl="https://kvprojectosc13.vault.azure.net/"
+            
+            # ID DEL CLUSTER (Conexión física)
             ls_adb_prod_properties_typeProperties_existingClusterId="0414-175402-ycrjrf77"
+            
+            # RUTA DEL NOTEBOOK (Solo si lograste parametrizar el 'path' como vimos antes)
+            PP_PROECT_OSCAR_DEV_properties_parameters_path_defaultValue="/Workspace/Users/duque.smart1397@outlook.com/deploy/"
