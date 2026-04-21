@@ -23,7 +23,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"notebookPath": {
-						"value": "@concat( pipeline().parameters.path, '0.Preparacion_Ambiente')",
+						"value": "@concat( activity('GetConfig').output.firstRow.path, '0.Preparacion_Ambiente')",
 						"type": "Expression"
 					},
 					"baseParameters": {
@@ -41,10 +41,6 @@
 						},
 						"catalogo": {
 							"value": "@activity('GetConfig').output.firstRow.catalogo",
-							"type": "Expression"
-						},
-						"path": {
-							"value": "@activity('GetConfig').output.firstRow.path",
 							"type": "Expression"
 						}
 					}
@@ -80,7 +76,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"notebookPath": {
-						"value": "@concat( pipeline().parameters.path, '2.Ingest_Orders')",
+						"value": "@concat( activity('GetConfig').output.firstRow.path, '2.Ingest_Orders')",
 						"type": "Expression"
 					},
 					"baseParameters": {
@@ -90,8 +86,10 @@
 						},
 						"schemaBronze": "bronze",
 						"schemaSilver": "silver",
-						"catalogo": "@activity('GetConfig').output.firstRow.catalogo",
-						"path": "@activity('GetConfig').output.firstRow.path"
+						"catalogo": {
+							"value": "@activity('GetConfig').output.firstRow.catalogo",
+							"type": "Expression"
+						}
 					}
 				},
 				"linkedServiceName": {
@@ -125,7 +123,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"notebookPath": {
-						"value": "@concat( pipeline().parameters.path, '2.Ingest_Products')",
+						"value": "@concat( activity('GetConfig').output.firstRow.path, '2.Ingest_Products')",
 						"type": "Expression"
 					},
 					"baseParameters": {
@@ -137,10 +135,6 @@
 						"schemaSilver": "silver",
 						"catalogo": {
 							"value": "@activity('GetConfig').output.firstRow.catalogo",
-							"type": "Expression"
-						},
-						"path": {
-							"value": "@activity('GetConfig').output.firstRow.path",
 							"type": "Expression"
 						}
 					}
@@ -176,7 +170,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"notebookPath": {
-						"value": "@concat( pipeline().parameters.path, '2.Ingest_Sellers_Customers')",
+						"value": "@concat( activity('GetConfig').output.firstRow.path, '2.Ingest_Sellers_Customers')",
 						"type": "Expression"
 					},
 					"baseParameters": {
@@ -186,8 +180,10 @@
 						},
 						"schemaBronze": "bronze",
 						"schemaSilver": "silver",
-						"catalogo": "@activity('GetConfig').output.firstRow.catalogo",
-						"path": "@activity('GetConfig').output.firstRow.path"
+						"catalogo": {
+							"value": "@activity('GetConfig').output.firstRow.catalogo",
+							"type": "Expression"
+						}
 					}
 				},
 				"linkedServiceName": {
@@ -221,14 +217,16 @@
 				"userProperties": [],
 				"typeProperties": {
 					"notebookPath": {
-						"value": "@concat( pipeline().parameters.path, '3.Transform_Orders')",
+						"value": "@concat( activity('GetConfig').output.firstRow.path, '3.Transform_Orders')",
 						"type": "Expression"
 					},
 					"baseParameters": {
 						"schemaBronze": "bronze",
 						"schemaSilver": "silver",
-						"catalogo": "@activity('GetConfig').output.firstRow.catalogo",
-						"path": "@activity('GetConfig').output.firstRow.path"
+						"catalogo": {
+							"value": "@activity('GetConfig').output.firstRow.catalogo",
+							"type": "Expression"
+						}
 					}
 				},
 				"linkedServiceName": {
@@ -262,7 +260,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"notebookPath": {
-						"value": "@concat( pipeline().parameters.path, '3.Transform_Products')",
+						"value": "@concat( activity('GetConfig').output.firstRow.path, '3.Transform_Products')",
 						"type": "Expression"
 					},
 					"baseParameters": {
@@ -271,8 +269,7 @@
 						"catalogo": {
 							"value": "@activity('GetConfig').output.firstRow.catalogo",
 							"type": "Expression"
-						},
-						"path": "@activity('GetConfig').output.firstRow.path"
+						}
 					}
 				},
 				"linkedServiceName": {
@@ -306,7 +303,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"notebookPath": {
-						"value": "@concat( pipeline().parameters.path, '3.Transform_Customers_Sellers')",
+						"value": "@concat( activity('GetConfig').output.firstRow.path, '3.Transform_Customers_Sellers')",
 						"type": "Expression"
 					},
 					"baseParameters": {
@@ -315,8 +312,7 @@
 						"catalogo": {
 							"value": "@activity('GetConfig').output.firstRow.catalogo",
 							"type": "Expression"
-						},
-						"path": "@activity('GetConfig').output.firstRow.path"
+						}
 					}
 				},
 				"linkedServiceName": {
@@ -362,13 +358,15 @@
 				"userProperties": [],
 				"typeProperties": {
 					"notebookPath": {
-						"value": "@concat( pipeline().parameters.path, '4.Transform_Orders_end')",
+						"value": "@concat( activity('GetConfig').output.firstRow.path, '4.Transform_Orders_end')",
 						"type": "Expression"
 					},
 					"baseParameters": {
 						"schemaSilver": "silver",
-						"catalogo": "@activity('GetConfig').output.firstRow.catalogo",
-						"path": "@activity('GetConfig').output.firstRow.path"
+						"catalogo": {
+							"value": "@activity('GetConfig').output.firstRow.catalogo",
+							"type": "Expression"
+						}
 					}
 				},
 				"linkedServiceName": {
@@ -402,14 +400,16 @@
 				"userProperties": [],
 				"typeProperties": {
 					"notebookPath": {
-						"value": "@concat( pipeline().parameters.path, '5.Load_orders')",
+						"value": "@concat( activity('GetConfig').output.firstRow.path, '5.Load_orders')",
 						"type": "Expression"
 					},
 					"baseParameters": {
 						"schemaGold": "gold",
 						"schemaSilver": "silver",
-						"catalogo": "@activity('GetConfig').output.firstRow.catalogo",
-						"path": "@activity('GetConfig').output.firstRow.path"
+						"catalogo": {
+							"value": "@activity('GetConfig').output.firstRow.catalogo",
+							"type": "Expression"
+						}
 					}
 				},
 				"linkedServiceName": {
