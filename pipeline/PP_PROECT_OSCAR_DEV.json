@@ -330,6 +330,11 @@
 				"defaultValue": "project_dev"
 			}
 		},
+		"variables": {
+			"test": {
+				"type": "String"
+			}
+		},
 		"annotations": [],
 		"lastPublishTime": "2026-04-15T01:01:07Z"
 	},
