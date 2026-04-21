@@ -70,18 +70,6 @@
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
 					},
-					"PP_PROECT_OSCAR_DEV_properties_parameters_catalogo_defaultValue": {
-						"value": "[parameters('PP_PROECT_OSCAR_DEV_properties_parameters_catalogo_defaultValue')]"
-					},
-					"PP_PROECT_OSCAR_DEV_properties_parameters_path_defaultValue": {
-						"value": "[parameters('PP_PROECT_OSCAR_DEV_properties_parameters_path_defaultValue')]"
-					},
-					"PP_PROECT_OSCAR_DEV_properties_parameters_storageName_defaultValue": {
-						"value": "[parameters('PP_PROECT_OSCAR_DEV_properties_parameters_storageName_defaultValue')]"
-					},
-					"PP_PROECT_OSCAR_DEV_properties_parameters_credential__defaultValue": {
-						"value": "[parameters('PP_PROECT_OSCAR_DEV_properties_parameters_credential__defaultValue')]"
-					},
 					"akvdev_properties_typeProperties_baseUrl": {
 						"value": "[parameters('akvdev_properties_typeProperties_baseUrl')]"
 					},
@@ -96,6 +84,18 @@
 					},
 					"ls_adb_dev_properties_typeProperties_existingClusterId": {
 						"value": "[parameters('ls_adb_dev_properties_typeProperties_existingClusterId')]"
+					},
+					"PP_PROECT_OSCAR_DEV_properties_parameters_catalogo_defaultValue": {
+						"value": "[parameters('PP_PROECT_OSCAR_DEV_properties_parameters_catalogo_defaultValue')]"
+					},
+					"PP_PROECT_OSCAR_DEV_properties_parameters_path_defaultValue": {
+						"value": "[parameters('PP_PROECT_OSCAR_DEV_properties_parameters_path_defaultValue')]"
+					},
+					"PP_PROECT_OSCAR_DEV_properties_parameters_storageName_defaultValue": {
+						"value": "[parameters('PP_PROECT_OSCAR_DEV_properties_parameters_storageName_defaultValue')]"
+					},
+					"PP_PROECT_OSCAR_DEV_properties_parameters_credential__defaultValue": {
+						"value": "[parameters('PP_PROECT_OSCAR_DEV_properties_parameters_credential__defaultValue')]"
 					}
 				}
 			},

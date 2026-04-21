@@ -57,7 +57,14 @@
 					{
 						"name": "Prep_Amb",
 						"type": "DatabricksNotebook",
-						"dependsOn": [],
+						"dependsOn": [
+							{
+								"activity": "GetCongif",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
 						"policy": {
 							"timeout": "0.12:00:00",
 							"retry": 1,
@@ -72,12 +79,18 @@
 								"type": "Expression"
 							},
 							"baseParameters": {
-								"storageName": "adlssmartprojectdev13",
+								"storageName": {
+									"value": "activity('GetConfig').output.value[0].storageName\n\n",
+									"type": "Expression"
+								},
 								"container": "raw",
 								"schemaBronze": "bronze",
 								"schemaSilver": "silver",
 								"schemaGold": "gold",
-								"credential_": "credential_dev"
+								"credential_": {
+									"value": "activity('GetConfig').output.value[0].credential_",
+									"type": "Expression"
+								}
 							}
 						},
 						"linkedServiceName": {
@@ -115,7 +128,10 @@
 								"type": "Expression"
 							},
 							"baseParameters": {
-								"storageName": "adlssmartprojectdev13",
+								"storageName": {
+									"value": "activity('GetConfig').output.value[0].storageName",
+									"type": "Expression"
+								},
 								"schemaBronze": "bronze",
 								"schemaSilver": "silver"
 							}
@@ -155,7 +171,10 @@
 								"type": "Expression"
 							},
 							"baseParameters": {
-								"storageName": "adlssmartprojectdev13",
+								"storageName": {
+									"value": "activity('GetConfig').output.value[0].storageName",
+									"type": "Expression"
+								},
 								"schemaBronze": "bronze",
 								"schemaSilver": "silver"
 							}
@@ -195,7 +214,10 @@
 								"type": "Expression"
 							},
 							"baseParameters": {
-								"storageName": "adlssmartprojectdev13",
+								"storageName": {
+									"value": "activity('GetConfig').output.value[0].storageName",
+									"type": "Expression"
+								},
 								"schemaBronze": "bronze",
 								"schemaSilver": "silver"
 							}
@@ -415,6 +437,37 @@
 								"cluster": "0409-155234-i86h65ts"
 							}
 						}
+					},
+					{
+						"name": "GetCongif",
+						"type": "Lookup",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "DelimitedTextSource",
+								"storeSettings": {
+									"type": "AzureBlobFSReadSettings",
+									"recursive": true,
+									"enablePartitionDiscovery": false
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings"
+								}
+							},
+							"dataset": {
+								"referenceName": "configParameter",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						}
 					}
 				],
 				"policy": {
@@ -447,7 +500,8 @@
 				"lastPublishTime": "2026-04-15T01:01:07Z"
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/ls_adb_dev')]"
+				"[concat(variables('factoryId'), '/linkedServices/ls_adb_dev')]",
+				"[concat(variables('factoryId'), '/datasets/configParameter')]"
 			]
 		},
 		{
@@ -526,6 +580,71 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/akvdev')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/dls_con')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"parameters": {
+					"storage": {
+						"type": "string",
+						"defaultValue": "storagesecretdev"
+					}
+				},
+				"annotations": [],
+				"type": "AzureBlobFS",
+				"typeProperties": {
+					"url": "https://adlssmartprojectdev13.dfs.core.windows.net/",
+					"accountKey": {
+						"type": "AzureKeyVaultSecret",
+						"store": {
+							"referenceName": "akvdev",
+							"type": "LinkedServiceReference"
+						},
+						"secretName": {
+							"value": "@linkedService().storage",
+							"type": "Expression"
+						}
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/akvdev')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/configParameter')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "dls_con",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": "config.csv",
+						"fileSystem": "parameters"
+					},
+					"columnDelimiter": ";",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "path;catalogo;storageName;cluster_id;credential_;domain;secretname;cluster",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/dls_con')]"
 			]
 		}
 	]
