@@ -425,10 +425,6 @@
 			"path": {
 				"type": "string",
 				"defaultValue": "/Users/duque.smart1397@outlook.com/CICD-Databricks/Proceso/"
-			},
-			"credential_": {
-				"type": "string",
-				"defaultValue": "credential_dev"
 			}
 		},
 		"variables": {
