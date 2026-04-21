@@ -1,0 +1,337 @@
+{
+	"name": "PP_PROECT_OSCAR_DEV",
+	"properties": {
+		"activities": [
+			{
+				"name": "Prep_Amb",
+				"type": "DatabricksNotebook",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 1,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "/Users/duque.smart1397@outlook.com/CICD-Databricks/PrepAmb/0.Preparacion_Ambiente",
+					"baseParameters": {
+						"storageName": "adlssmartprojectdev13",
+						"container": "raw",
+						"schemaBronze": "bronze",
+						"schemaSilver": "silver",
+						"schemaGold": "gold",
+						"credential_": "credential_dev"
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "ls_adb_dev",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "Download_Data",
+				"type": "DatabricksNotebook",
+				"dependsOn": [
+					{
+						"activity": "Prep_Amb",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 1,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "/Users/duque.smart1397@outlook.com/CICD-Databricks/Proceso/1.Download_Raw_Data",
+					"baseParameters": {
+						"storageName": "adlssmartprojectdev13",
+						"container": "raw"
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "ls_adb_dev",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "Ingest_Orders",
+				"type": "DatabricksNotebook",
+				"dependsOn": [
+					{
+						"activity": "Download_Data",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 1,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "/Users/duque.smart1397@outlook.com/CICD-Databricks/Proceso/2.Ingest_Orders",
+					"baseParameters": {
+						"storageName": "adlssmartprojectdev13",
+						"schemaBronze": "bronze",
+						"schemaSilver": "silver"
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "ls_adb_dev",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "Ingest_Products",
+				"type": "DatabricksNotebook",
+				"dependsOn": [
+					{
+						"activity": "Download_Data",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "/Users/duque.smart1397@outlook.com/CICD-Databricks/Proceso/2.Ingest_Products",
+					"baseParameters": {
+						"storageName": "adlssmartprojectdev13",
+						"schemaBronze": "bronze",
+						"schemaSilver": "silver"
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "ls_adb_dev",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "Ingest_Sellers_Customers",
+				"type": "DatabricksNotebook",
+				"dependsOn": [
+					{
+						"activity": "Download_Data",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "/Users/duque.smart1397@outlook.com/CICD-Databricks/Proceso/2.Ingest_Sellers_Customers",
+					"baseParameters": {
+						"storageName": "adlssmartprojectdev13",
+						"schemaBronze": "bronze",
+						"schemaSilver": "silver"
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "ls_adb_dev",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "Transform_Orders",
+				"type": "DatabricksNotebook",
+				"dependsOn": [
+					{
+						"activity": "Ingest_Orders",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "/Users/duque.smart1397@outlook.com/CICD-Databricks/Proceso/3.Transform_Orders",
+					"baseParameters": {
+						"schemaBronze": "bronze",
+						"schemaSilver": "silver"
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "ls_adb_dev",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "Transform_Products",
+				"type": "DatabricksNotebook",
+				"dependsOn": [
+					{
+						"activity": "Ingest_Products",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "/Users/duque.smart1397@outlook.com/CICD-Databricks/Proceso/3.Transform_Products",
+					"baseParameters": {
+						"schemaBronze": "bronze",
+						"schemaSilver": "silver"
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "ls_adb_dev",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "Transform_sellers_customer",
+				"type": "DatabricksNotebook",
+				"dependsOn": [
+					{
+						"activity": "Ingest_Sellers_Customers",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "/Users/duque.smart1397@outlook.com/CICD-Databricks/Proceso/3.Transform_Customers_Sellers",
+					"baseParameters": {
+						"schemaBronze": "bronze",
+						"schemaSilver": "silver"
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "ls_adb_dev",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "Transform_Orders_end",
+				"type": "DatabricksNotebook",
+				"dependsOn": [
+					{
+						"activity": "Transform_sellers_customer",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "Transform_Products",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "Transform_Orders",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 1,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "/Users/duque.smart1397@outlook.com/CICD-Databricks/Proceso/4.Transform_Orders_end",
+					"baseParameters": {
+						"schemaSilver": "silver"
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "ls_adb_dev",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "Load_orders",
+				"type": "DatabricksNotebook",
+				"dependsOn": [
+					{
+						"activity": "Transform_Orders_end",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 1,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "/Users/duque.smart1397@outlook.com/CICD-Databricks/Proceso/5.Load_orders",
+					"baseParameters": {
+						"schemaGold": "gold",
+						"schemaSilver": "silver"
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "ls_adb_dev",
+					"type": "LinkedServiceReference"
+				}
+			}
+		],
+		"parameters": {
+			"catalogo": {
+				"type": "string",
+				"defaultValue": "project_dev"
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2026-04-15T01:01:07Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}
