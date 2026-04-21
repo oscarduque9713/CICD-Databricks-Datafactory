@@ -11,13 +11,13 @@
 			"type": "string",
 			"defaultValue": "project_dev"
 		},
-		"PP_PROECT_OSCAR_DEV_properties_parameters_linked_service_defaultValue": {
-			"type": "string",
-			"defaultValue": "ls_adb_dev"
-		},
 		"PP_PROECT_OSCAR_DEV_properties_parameters_path_defaultValue": {
 			"type": "string",
 			"defaultValue": "/Users/duque.smart1397@outlook.com/CICD-Databricks/Proceso/"
+		},
+		"PP_PROECT_OSCAR_DEV_properties_parameters_storageName_defaultValue": {
+			"type": "string",
+			"defaultValue": "adlssmartprojectdev13"
 		},
 		"akvdev_properties_typeProperties_baseUrl": {
 			"type": "string",
@@ -69,11 +69,11 @@
 					"PP_PROECT_OSCAR_DEV_properties_parameters_catalogo_defaultValue": {
 						"value": "[parameters('PP_PROECT_OSCAR_DEV_properties_parameters_catalogo_defaultValue')]"
 					},
-					"PP_PROECT_OSCAR_DEV_properties_parameters_linked_service_defaultValue": {
-						"value": "[parameters('PP_PROECT_OSCAR_DEV_properties_parameters_linked_service_defaultValue')]"
-					},
 					"PP_PROECT_OSCAR_DEV_properties_parameters_path_defaultValue": {
 						"value": "[parameters('PP_PROECT_OSCAR_DEV_properties_parameters_path_defaultValue')]"
+					},
+					"PP_PROECT_OSCAR_DEV_properties_parameters_storageName_defaultValue": {
+						"value": "[parameters('PP_PROECT_OSCAR_DEV_properties_parameters_storageName_defaultValue')]"
 					},
 					"akvdev_properties_typeProperties_baseUrl": {
 						"value": "[parameters('akvdev_properties_typeProperties_baseUrl')]"

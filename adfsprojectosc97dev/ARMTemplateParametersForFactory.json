@@ -8,11 +8,11 @@
 		"PP_PROECT_OSCAR_DEV_properties_parameters_catalogo_defaultValue": {
 			"value": "project_dev"
 		},
-		"PP_PROECT_OSCAR_DEV_properties_parameters_linked_service_defaultValue": {
-			"value": "ls_adb_dev"
-		},
 		"PP_PROECT_OSCAR_DEV_properties_parameters_path_defaultValue": {
 			"value": "/Users/duque.smart1397@outlook.com/CICD-Databricks/Proceso/"
+		},
+		"PP_PROECT_OSCAR_DEV_properties_parameters_storageName_defaultValue": {
+			"value": "adlssmartprojectdev13"
 		},
 		"akvdev_properties_typeProperties_baseUrl": {
 			"value": "https://kvprojectosc13.vault.azure.net/"
