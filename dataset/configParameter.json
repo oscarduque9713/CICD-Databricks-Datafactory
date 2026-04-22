@@ -1,0 +1,31 @@
+{
+	"name": "configParameter",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "dls_con",
+			"type": "LinkedServiceReference",
+			"parameters": {
+				"storage": "storagesecretdev"
+			}
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "config.csv",
+				"fileSystem": "parameters"
+			},
+			"columnDelimiter": ";",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "path;catalogo;storageName;cluster_id;credential_;domain;secretname;cluster",
+				"type": "String"
+			}
+		]
+	}
+}

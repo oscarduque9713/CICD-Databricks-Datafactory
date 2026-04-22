@@ -5,7 +5,14 @@
 			{
 				"name": "Prep_Amb",
 				"type": "DatabricksNotebook",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "GetConfig",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
 				"policy": {
 					"timeout": "0.12:00:00",
 					"retry": 1,
@@ -15,23 +22,50 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"notebookPath": "/Users/duque.smart1397@outlook.com/CICD-Databricks/PrepAmb/0.Preparacion_Ambiente",
+					"notebookPath": {
+						"value": "@concat( activity('GetConfig').output.firstRow.path, '0.Preparacion_Ambiente')",
+						"type": "Expression"
+					},
 					"baseParameters": {
-						"storageName": "adlssmartprojectdev13",
+						"storageName": {
+							"value": "@activity('GetConfig').output.firstRow.storageName",
+							"type": "Expression"
+						},
 						"container": "raw",
 						"schemaBronze": "bronze",
 						"schemaSilver": "silver",
 						"schemaGold": "gold",
-						"credential_": "credential_dev"
+						"credential_": {
+							"value": "@activity('GetConfig').output.firstRow.credential_",
+							"type": "Expression"
+						},
+						"catalogo": {
+							"value": "@activity('GetConfig').output.firstRow.catalogo",
+							"type": "Expression"
+						}
 					}
 				},
 				"linkedServiceName": {
 					"referenceName": "ls_adb_dev",
-					"type": "LinkedServiceReference"
+					"type": "LinkedServiceReference",
+					"parameters": {
+						"domain": {
+							"value": "@activity('GetConfig').output.firstRow.domain",
+							"type": "Expression"
+						},
+						"secretname": {
+							"value": "@activity('GetConfig').output.firstRow.secretname",
+							"type": "Expression"
+						},
+						"cluster": {
+							"value": "@activity('GetConfig').output.firstRow.cluster_id",
+							"type": "Expression"
+						}
+					}
 				}
 			},
 			{
-				"name": "Download_Data",
+				"name": "Ingest_Orders",
 				"type": "DatabricksNotebook",
 				"dependsOn": [
 					{
@@ -50,47 +84,40 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"notebookPath": "/Users/duque.smart1397@outlook.com/CICD-Databricks/Proceso/1.Download_Raw_Data",
+					"notebookPath": {
+						"value": "@concat( activity('GetConfig').output.firstRow.path, '2.Ingest_Orders')",
+						"type": "Expression"
+					},
 					"baseParameters": {
-						"storageName": "adlssmartprojectdev13",
-						"container": "raw"
-					}
-				},
-				"linkedServiceName": {
-					"referenceName": "ls_adb_dev",
-					"type": "LinkedServiceReference"
-				}
-			},
-			{
-				"name": "Ingest_Orders",
-				"type": "DatabricksNotebook",
-				"dependsOn": [
-					{
-						"activity": "Download_Data",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
-				"policy": {
-					"timeout": "0.12:00:00",
-					"retry": 1,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"notebookPath": "/Users/duque.smart1397@outlook.com/CICD-Databricks/Proceso/2.Ingest_Orders",
-					"baseParameters": {
-						"storageName": "adlssmartprojectdev13",
+						"storageName": {
+							"value": "@activity('GetConfig').output.firstRow.storageName\n",
+							"type": "Expression"
+						},
 						"schemaBronze": "bronze",
-						"schemaSilver": "silver"
+						"schemaSilver": "silver",
+						"catalogo": {
+							"value": "@activity('GetConfig').output.firstRow.catalogo",
+							"type": "Expression"
+						}
 					}
 				},
 				"linkedServiceName": {
 					"referenceName": "ls_adb_dev",
-					"type": "LinkedServiceReference"
+					"type": "LinkedServiceReference",
+					"parameters": {
+						"domain": {
+							"value": "@activity('GetConfig').output.firstRow.domain",
+							"type": "Expression"
+						},
+						"secretname": {
+							"value": "@activity('GetConfig').output.firstRow.secretname",
+							"type": "Expression"
+						},
+						"cluster": {
+							"value": "@activity('GetConfig').output.firstRow.cluster_id",
+							"type": "Expression"
+						}
+					}
 				}
 			},
 			{
@@ -98,7 +125,7 @@
 				"type": "DatabricksNotebook",
 				"dependsOn": [
 					{
-						"activity": "Download_Data",
+						"activity": "Prep_Amb",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -113,16 +140,40 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"notebookPath": "/Users/duque.smart1397@outlook.com/CICD-Databricks/Proceso/2.Ingest_Products",
+					"notebookPath": {
+						"value": "@concat( activity('GetConfig').output.firstRow.path, '2.Ingest_Products')",
+						"type": "Expression"
+					},
 					"baseParameters": {
-						"storageName": "adlssmartprojectdev13",
+						"storageName": {
+							"value": "@activity('GetConfig').output.firstRow.storageName\n",
+							"type": "Expression"
+						},
 						"schemaBronze": "bronze",
-						"schemaSilver": "silver"
+						"schemaSilver": "silver",
+						"catalogo": {
+							"value": "@activity('GetConfig').output.firstRow.catalogo",
+							"type": "Expression"
+						}
 					}
 				},
 				"linkedServiceName": {
 					"referenceName": "ls_adb_dev",
-					"type": "LinkedServiceReference"
+					"type": "LinkedServiceReference",
+					"parameters": {
+						"domain": {
+							"value": "@activity('GetConfig').output.firstRow.domain",
+							"type": "Expression"
+						},
+						"secretname": {
+							"value": "@activity('GetConfig').output.firstRow.secretname",
+							"type": "Expression"
+						},
+						"cluster": {
+							"value": "@activity('GetConfig').output.firstRow.cluster_id",
+							"type": "Expression"
+						}
+					}
 				}
 			},
 			{
@@ -130,7 +181,7 @@
 				"type": "DatabricksNotebook",
 				"dependsOn": [
 					{
-						"activity": "Download_Data",
+						"activity": "Prep_Amb",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -145,16 +196,40 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"notebookPath": "/Users/duque.smart1397@outlook.com/CICD-Databricks/Proceso/2.Ingest_Sellers_Customers",
+					"notebookPath": {
+						"value": "@concat( activity('GetConfig').output.firstRow.path, '2.Ingest_Sellers_Customers')",
+						"type": "Expression"
+					},
 					"baseParameters": {
-						"storageName": "adlssmartprojectdev13",
+						"storageName": {
+							"value": "@activity('GetConfig').output.firstRow.storageName\n",
+							"type": "Expression"
+						},
 						"schemaBronze": "bronze",
-						"schemaSilver": "silver"
+						"schemaSilver": "silver",
+						"catalogo": {
+							"value": "@activity('GetConfig').output.firstRow.catalogo",
+							"type": "Expression"
+						}
 					}
 				},
 				"linkedServiceName": {
 					"referenceName": "ls_adb_dev",
-					"type": "LinkedServiceReference"
+					"type": "LinkedServiceReference",
+					"parameters": {
+						"domain": {
+							"value": "@activity('GetConfig').output.firstRow.domain",
+							"type": "Expression"
+						},
+						"secretname": {
+							"value": "@activity('GetConfig').output.firstRow.secretname",
+							"type": "Expression"
+						},
+						"cluster": {
+							"value": "@activity('GetConfig').output.firstRow.cluster_id",
+							"type": "Expression"
+						}
+					}
 				}
 			},
 			{
@@ -177,15 +252,36 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"notebookPath": "/Users/duque.smart1397@outlook.com/CICD-Databricks/Proceso/3.Transform_Orders",
+					"notebookPath": {
+						"value": "@concat( activity('GetConfig').output.firstRow.path, '3.Transform_Orders')",
+						"type": "Expression"
+					},
 					"baseParameters": {
 						"schemaBronze": "bronze",
-						"schemaSilver": "silver"
+						"schemaSilver": "silver",
+						"catalogo": {
+							"value": "@activity('GetConfig').output.firstRow.catalogo",
+							"type": "Expression"
+						}
 					}
 				},
 				"linkedServiceName": {
 					"referenceName": "ls_adb_dev",
-					"type": "LinkedServiceReference"
+					"type": "LinkedServiceReference",
+					"parameters": {
+						"domain": {
+							"value": "@activity('GetConfig').output.firstRow.domain",
+							"type": "Expression"
+						},
+						"secretname": {
+							"value": "@activity('GetConfig').output.firstRow.secretname",
+							"type": "Expression"
+						},
+						"cluster": {
+							"value": "@activity('GetConfig').output.firstRow.cluster_id",
+							"type": "Expression"
+						}
+					}
 				}
 			},
 			{
@@ -208,15 +304,36 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"notebookPath": "/Users/duque.smart1397@outlook.com/CICD-Databricks/Proceso/3.Transform_Products",
+					"notebookPath": {
+						"value": "@concat( activity('GetConfig').output.firstRow.path, '3.Transform_Products')",
+						"type": "Expression"
+					},
 					"baseParameters": {
 						"schemaBronze": "bronze",
-						"schemaSilver": "silver"
+						"schemaSilver": "silver",
+						"catalogo": {
+							"value": "@activity('GetConfig').output.firstRow.catalogo",
+							"type": "Expression"
+						}
 					}
 				},
 				"linkedServiceName": {
 					"referenceName": "ls_adb_dev",
-					"type": "LinkedServiceReference"
+					"type": "LinkedServiceReference",
+					"parameters": {
+						"domain": {
+							"value": "@activity('GetConfig').output.firstRow.domain",
+							"type": "Expression"
+						},
+						"secretname": {
+							"value": "@activity('GetConfig').output.firstRow.secretname",
+							"type": "Expression"
+						},
+						"cluster": {
+							"value": "@activity('GetConfig').output.firstRow.cluster_id",
+							"type": "Expression"
+						}
+					}
 				}
 			},
 			{
@@ -239,15 +356,36 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"notebookPath": "/Users/duque.smart1397@outlook.com/CICD-Databricks/Proceso/3.Transform_Customers_Sellers",
+					"notebookPath": {
+						"value": "@concat( activity('GetConfig').output.firstRow.path, '3.Transform_Customers_Sellers')",
+						"type": "Expression"
+					},
 					"baseParameters": {
 						"schemaBronze": "bronze",
-						"schemaSilver": "silver"
+						"schemaSilver": "silver",
+						"catalogo": {
+							"value": "@activity('GetConfig').output.firstRow.catalogo",
+							"type": "Expression"
+						}
 					}
 				},
 				"linkedServiceName": {
 					"referenceName": "ls_adb_dev",
-					"type": "LinkedServiceReference"
+					"type": "LinkedServiceReference",
+					"parameters": {
+						"domain": {
+							"value": "@activity('GetConfig').output.firstRow.domain",
+							"type": "Expression"
+						},
+						"secretname": {
+							"value": "@activity('GetConfig').output.firstRow.secretname",
+							"type": "Expression"
+						},
+						"cluster": {
+							"value": "@activity('GetConfig').output.firstRow.cluster_id",
+							"type": "Expression"
+						}
+					}
 				}
 			},
 			{
@@ -282,14 +420,35 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"notebookPath": "/Users/duque.smart1397@outlook.com/CICD-Databricks/Proceso/4.Transform_Orders_end",
+					"notebookPath": {
+						"value": "@concat( activity('GetConfig').output.firstRow.path, '4.Transform_Orders_end')",
+						"type": "Expression"
+					},
 					"baseParameters": {
-						"schemaSilver": "silver"
+						"schemaSilver": "silver",
+						"catalogo": {
+							"value": "@activity('GetConfig').output.firstRow.catalogo",
+							"type": "Expression"
+						}
 					}
 				},
 				"linkedServiceName": {
 					"referenceName": "ls_adb_dev",
-					"type": "LinkedServiceReference"
+					"type": "LinkedServiceReference",
+					"parameters": {
+						"domain": {
+							"value": "@activity('GetConfig').output.firstRow.domain",
+							"type": "Expression"
+						},
+						"secretname": {
+							"value": "@activity('GetConfig').output.firstRow.secretname",
+							"type": "Expression"
+						},
+						"cluster": {
+							"value": "@activity('GetConfig').output.firstRow.cluster_id",
+							"type": "Expression"
+						}
+					}
 				}
 			},
 			{
@@ -312,24 +471,69 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"notebookPath": "/Users/duque.smart1397@outlook.com/CICD-Databricks/Proceso/5.Load_orders",
+					"notebookPath": {
+						"value": "@concat( activity('GetConfig').output.firstRow.path, '5.Load_orders')",
+						"type": "Expression"
+					},
 					"baseParameters": {
 						"schemaGold": "gold",
-						"schemaSilver": "silver"
+						"schemaSilver": "silver",
+						"catalogo": {
+							"value": "@activity('GetConfig').output.firstRow.catalogo",
+							"type": "Expression"
+						}
 					}
 				},
 				"linkedServiceName": {
 					"referenceName": "ls_adb_dev",
-					"type": "LinkedServiceReference"
+					"type": "LinkedServiceReference",
+					"parameters": {
+						"domain": {
+							"value": "@activity('GetConfig').output.firstRow.domain",
+							"type": "Expression"
+						},
+						"secretname": {
+							"value": "@activity('GetConfig').output.firstRow.secretname",
+							"type": "Expression"
+						},
+						"cluster": {
+							"value": "@activity('GetConfig').output.firstRow.cluster_id",
+							"type": "Expression"
+						}
+					}
+				}
+			},
+			{
+				"name": "GetConfig",
+				"type": "Lookup",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"dataset": {
+						"referenceName": "configParameter",
+						"type": "DatasetReference"
+					}
 				}
 			}
 		],
-		"parameters": {
-			"catalogo": {
-				"type": "string",
-				"defaultValue": "project_dev"
-			}
-		},
 		"annotations": [],
 		"lastPublishTime": "2026-04-15T01:01:07Z"
 	},

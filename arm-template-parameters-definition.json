@@ -1,0 +1,43 @@
+{
+    "Microsoft.DataFactory/factories": {
+        "properties": {
+            "globalParameters": {
+                "*": {
+                    "value": "="
+                }
+            }
+        }
+    },
+    "Microsoft.DataFactory/factories/pipelines": {
+        "properties": {
+            "parameters": {
+                "*": {
+                    "defaultValue": "="
+                }
+            }
+        }
+    },
+    "Microsoft.DataFactory/factories/linkedServices": {
+        "*": {
+            "properties": {
+                "typeProperties": {
+                    "baseUrl": "=",
+                    "existingClusterId": "=",
+                    "domain": "=",
+                    "secretname": "=",
+                    "cluster": "="
+                }
+            }
+        }
+    },
+    "Microsoft.DataFactory/factories/datasets": {
+        "*": {
+            "properties": {
+                "typeProperties": {
+                    "folderPath": "=",
+                    "fileName": "="
+                }
+            }
+        }
+    }
+}
