@@ -27,7 +27,7 @@
 			"Value": "storagesecretdev"
 		},
 		"sta_secret_key": {
-			"Value": ""
+			"value": ""
 		}
 	}
 }
