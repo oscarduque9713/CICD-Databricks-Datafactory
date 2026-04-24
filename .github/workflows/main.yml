@@ -78,6 +78,7 @@ jobs:
             factoryName="adfsprojectosc9713prod"
             dls_con_properties_typeProperties_storageAccountUrl="https://adlssmartproject13prod.dfs.core.windows.net/"
             dls_con_properties_typeProperties_secretName="storagescrepnewprod"
+            sta_secret_key=${{ secrets.DEST_STORAGE_ACCOUNT_KEY }}
 
       - name: Done
         run: echo "🎉 ¡Databricks y ADF desplegados en Producción!"
