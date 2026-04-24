@@ -5,11 +5,26 @@
 		"factoryName": {
 			"value": "adfsprojectosc97dev"
 		},
-		"dls_con_properties_typeProperties_storageAccountUrl": {
-			"value": "https://adlssmartprojectdev13.dfs.core.windows.net/"
+		"akvdev_properties_typeProperties_baseUrl": {
+			"value": "https://kvprojectosc13.vault.azure.net/"
 		},
-		"dls_con_properties_typeProperties_secretName": {
-			"value": "storagesecretdev"
+		"ls_adb_dev_properties_typeProperties_domain": {
+			"value": "@linkedService().domain"
+		},
+		"ls_adb_dev_properties_typeProperties_existingClusterId": {
+			"value": "@linkedService().cluster"
+		},
+		"ls_adb_prod_properties_typeProperties_domain": {
+			"value": "https://adb-7405618610925729.9.azuredatabricks.net"
+		},
+		"ls_adb_prod_properties_typeProperties_existingClusterId": {
+			"value": "0409-155234-i86h65ts"
+		},
+		"containerUri": {
+			"value": ""
+		},
+		"containerSasToken": {
+			"value": ""
 		}
 	}
 }

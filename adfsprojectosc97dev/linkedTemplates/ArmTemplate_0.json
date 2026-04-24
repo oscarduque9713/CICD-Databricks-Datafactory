@@ -3,13 +3,29 @@
 	"contentVersion": "1.0.0.0",
 	"parameters": {
 		"factoryName": {
-			"value": "adfsprojectosc97dev"
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "adfsprojectosc97dev"
 		},
-		"dls_con_properties_typeProperties_storageAccountUrl": {
-			"value": "https://adlssmartprojectdev13.dfs.core.windows.net/"
+		"akvdev_properties_typeProperties_baseUrl": {
+			"type": "string",
+			"defaultValue": "https://kvprojectosc13.vault.azure.net/"
 		},
-		"dls_con_properties_typeProperties_secretName": {
-			"value": "storagesecretdev"
+		"ls_adb_dev_properties_typeProperties_domain": {
+			"type": "string",
+			"defaultValue": "@linkedService().domain"
+		},
+		"ls_adb_dev_properties_typeProperties_existingClusterId": {
+			"type": "string",
+			"defaultValue": "@linkedService().cluster"
+		},
+		"ls_adb_prod_properties_typeProperties_domain": {
+			"type": "string",
+			"defaultValue": "https://adb-7405618610925729.9.azuredatabricks.net"
+		},
+		"ls_adb_prod_properties_typeProperties_existingClusterId": {
+			"type": "string",
+			"defaultValue": "0409-155234-i86h65ts"
 		}
 	},
 	"variables": {
@@ -24,7 +40,7 @@
 				"annotations": [],
 				"type": "AzureKeyVault",
 				"typeProperties": {
-					"baseUrl": "https://kvprojectosc13.vault.azure.net/"
+					"baseUrl": "[parameters('akvdev_properties_typeProperties_baseUrl')]"
 				}
 			},
 			"dependsOn": []
@@ -35,17 +51,15 @@
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"parameters": {
-					"storageAccountUrl": {
-		                "type": "string"
-            		},
-					"secretName": {
-						"type": "string"
+					"storage": {
+						"type": "string",
+						"defaultValue": "storagesecretdev"
 					}
 				},
 				"annotations": [],
 				"type": "AzureBlobFS",
 				"typeProperties": {
-					"url": "[parameters('dls_con_properties_typeProperties_storageAccountUrl')]",
+					"url": "https://adlssmartprojectdev13.dfs.core.windows.net/",
 					"accountKey": {
 						"type": "AzureKeyVaultSecret",
 						"store": {
@@ -53,7 +67,7 @@
 							"type": "LinkedServiceReference"
 						},
 						"secretName": {
-							"value": "[parameters('dls_con_properties_typeProperties_secretName')]",
+							"value": "@linkedService().storage",
 							"type": "Expression"
 						}
 					}
@@ -137,8 +151,7 @@
 					"referenceName": "dls_con",
 					"type": "LinkedServiceReference",
 					"parameters": {
-						"storageAccountUrl": "[parameters('dls_con_properties_typeProperties_storageAccountUrl')]",
-                		"secretName": "[parameters('dls_con_properties_typeProperties_secretName')]"
+						"storage": "storagesecretdev"
 					}
 				},
 				"annotations": [],
@@ -200,10 +213,10 @@
 									"value": "@activity('GetConfig').output.firstRow.storageName",
 									"type": "Expression"
 								},
-								"container": "raw",
-								"schemaBronze": "bronze",
-								"schemaSilver": "silver",
-								"schemaGold": "gold",
+								"container": {
+									"value": "@activity('GetConfig').output.firstRow.container",
+									"type": "Expression"
+								},
 								"credential_": {
 									"value": "@activity('GetConfig').output.firstRow.credential_",
 									"type": "Expression"
@@ -234,7 +247,7 @@
 						}
 					},
 					{
-						"name": "Ingest_Orders",
+						"name": "Ingest_Bronze",
 						"type": "DatabricksNotebook",
 						"dependsOn": [
 							{
@@ -262,10 +275,12 @@
 									"value": "@activity('GetConfig').output.firstRow.storageName\n",
 									"type": "Expression"
 								},
-								"schemaBronze": "bronze",
-								"schemaSilver": "silver",
 								"catalogo": {
 									"value": "@activity('GetConfig').output.firstRow.catalogo",
+									"type": "Expression"
+								},
+								"container": {
+									"value": "@activity('GetConfig').output.firstRow.container",
 									"type": "Expression"
 								}
 							}
@@ -290,291 +305,11 @@
 						}
 					},
 					{
-						"name": "Ingest_Products",
+						"name": "Transform_Silver",
 						"type": "DatabricksNotebook",
 						"dependsOn": [
 							{
-								"activity": "Prep_Amb",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "0.12:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"notebookPath": {
-								"value": "@concat( activity('GetConfig').output.firstRow.path, '2.Ingest_Products')",
-								"type": "Expression"
-							},
-							"baseParameters": {
-								"storageName": {
-									"value": "@activity('GetConfig').output.firstRow.storageName\n",
-									"type": "Expression"
-								},
-								"schemaBronze": "bronze",
-								"schemaSilver": "silver",
-								"catalogo": {
-									"value": "@activity('GetConfig').output.firstRow.catalogo",
-									"type": "Expression"
-								}
-							}
-						},
-						"linkedServiceName": {
-							"referenceName": "ls_adb_dev",
-							"type": "LinkedServiceReference",
-							"parameters": {
-								"domain": {
-									"value": "@activity('GetConfig').output.firstRow.domain",
-									"type": "Expression"
-								},
-								"secretname": {
-									"value": "@activity('GetConfig').output.firstRow.secretname",
-									"type": "Expression"
-								},
-								"cluster": {
-									"value": "@activity('GetConfig').output.firstRow.cluster_id",
-									"type": "Expression"
-								}
-							}
-						}
-					},
-					{
-						"name": "Ingest_Sellers_Customers",
-						"type": "DatabricksNotebook",
-						"dependsOn": [
-							{
-								"activity": "Prep_Amb",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "0.12:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"notebookPath": {
-								"value": "@concat( activity('GetConfig').output.firstRow.path, '2.Ingest_Sellers_Customers')",
-								"type": "Expression"
-							},
-							"baseParameters": {
-								"storageName": {
-									"value": "@activity('GetConfig').output.firstRow.storageName\n",
-									"type": "Expression"
-								},
-								"schemaBronze": "bronze",
-								"schemaSilver": "silver",
-								"catalogo": {
-									"value": "@activity('GetConfig').output.firstRow.catalogo",
-									"type": "Expression"
-								}
-							}
-						},
-						"linkedServiceName": {
-							"referenceName": "ls_adb_dev",
-							"type": "LinkedServiceReference",
-							"parameters": {
-								"domain": {
-									"value": "@activity('GetConfig').output.firstRow.domain",
-									"type": "Expression"
-								},
-								"secretname": {
-									"value": "@activity('GetConfig').output.firstRow.secretname",
-									"type": "Expression"
-								},
-								"cluster": {
-									"value": "@activity('GetConfig').output.firstRow.cluster_id",
-									"type": "Expression"
-								}
-							}
-						}
-					},
-					{
-						"name": "Transform_Orders",
-						"type": "DatabricksNotebook",
-						"dependsOn": [
-							{
-								"activity": "Ingest_Orders",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "0.12:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"notebookPath": {
-								"value": "@concat( activity('GetConfig').output.firstRow.path, '3.Transform_Orders')",
-								"type": "Expression"
-							},
-							"baseParameters": {
-								"schemaBronze": "bronze",
-								"schemaSilver": "silver",
-								"catalogo": {
-									"value": "@activity('GetConfig').output.firstRow.catalogo",
-									"type": "Expression"
-								}
-							}
-						},
-						"linkedServiceName": {
-							"referenceName": "ls_adb_dev",
-							"type": "LinkedServiceReference",
-							"parameters": {
-								"domain": {
-									"value": "@activity('GetConfig').output.firstRow.domain",
-									"type": "Expression"
-								},
-								"secretname": {
-									"value": "@activity('GetConfig').output.firstRow.secretname",
-									"type": "Expression"
-								},
-								"cluster": {
-									"value": "@activity('GetConfig').output.firstRow.cluster_id",
-									"type": "Expression"
-								}
-							}
-						}
-					},
-					{
-						"name": "Transform_Products",
-						"type": "DatabricksNotebook",
-						"dependsOn": [
-							{
-								"activity": "Ingest_Products",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "0.12:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"notebookPath": {
-								"value": "@concat( activity('GetConfig').output.firstRow.path, '3.Transform_Products')",
-								"type": "Expression"
-							},
-							"baseParameters": {
-								"schemaBronze": "bronze",
-								"schemaSilver": "silver",
-								"catalogo": {
-									"value": "@activity('GetConfig').output.firstRow.catalogo",
-									"type": "Expression"
-								}
-							}
-						},
-						"linkedServiceName": {
-							"referenceName": "ls_adb_dev",
-							"type": "LinkedServiceReference",
-							"parameters": {
-								"domain": {
-									"value": "@activity('GetConfig').output.firstRow.domain",
-									"type": "Expression"
-								},
-								"secretname": {
-									"value": "@activity('GetConfig').output.firstRow.secretname",
-									"type": "Expression"
-								},
-								"cluster": {
-									"value": "@activity('GetConfig').output.firstRow.cluster_id",
-									"type": "Expression"
-								}
-							}
-						}
-					},
-					{
-						"name": "Transform_sellers_customer",
-						"type": "DatabricksNotebook",
-						"dependsOn": [
-							{
-								"activity": "Ingest_Sellers_Customers",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "0.12:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"notebookPath": {
-								"value": "@concat( activity('GetConfig').output.firstRow.path, '3.Transform_Customers_Sellers')",
-								"type": "Expression"
-							},
-							"baseParameters": {
-								"schemaBronze": "bronze",
-								"schemaSilver": "silver",
-								"catalogo": {
-									"value": "@activity('GetConfig').output.firstRow.catalogo",
-									"type": "Expression"
-								}
-							}
-						},
-						"linkedServiceName": {
-							"referenceName": "ls_adb_dev",
-							"type": "LinkedServiceReference",
-							"parameters": {
-								"domain": {
-									"value": "@activity('GetConfig').output.firstRow.domain",
-									"type": "Expression"
-								},
-								"secretname": {
-									"value": "@activity('GetConfig').output.firstRow.secretname",
-									"type": "Expression"
-								},
-								"cluster": {
-									"value": "@activity('GetConfig').output.firstRow.cluster_id",
-									"type": "Expression"
-								}
-							}
-						}
-					},
-					{
-						"name": "Transform_Orders_end",
-						"type": "DatabricksNotebook",
-						"dependsOn": [
-							{
-								"activity": "Transform_sellers_customer",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							},
-							{
-								"activity": "Transform_Products",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							},
-							{
-								"activity": "Transform_Orders",
+								"activity": "Ingest_Bronze",
 								"dependencyConditions": [
 									"Succeeded"
 								]
@@ -594,59 +329,10 @@
 								"type": "Expression"
 							},
 							"baseParameters": {
-								"schemaSilver": "silver",
-								"catalogo": {
-									"value": "@activity('GetConfig').output.firstRow.catalogo",
-									"type": "Expression"
-								}
-							}
-						},
-						"linkedServiceName": {
-							"referenceName": "ls_adb_dev",
-							"type": "LinkedServiceReference",
-							"parameters": {
-								"domain": {
-									"value": "@activity('GetConfig').output.firstRow.domain",
+								"container": {
+									"value": "@activity('GetConfig').output.firstRow.container",
 									"type": "Expression"
 								},
-								"secretname": {
-									"value": "@activity('GetConfig').output.firstRow.secretname",
-									"type": "Expression"
-								},
-								"cluster": {
-									"value": "@activity('GetConfig').output.firstRow.cluster_id",
-									"type": "Expression"
-								}
-							}
-						}
-					},
-					{
-						"name": "Load_orders",
-						"type": "DatabricksNotebook",
-						"dependsOn": [
-							{
-								"activity": "Transform_Orders_end",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "0.12:00:00",
-							"retry": 1,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"notebookPath": {
-								"value": "@concat( activity('GetConfig').output.firstRow.path, '5.Load_orders')",
-								"type": "Expression"
-							},
-							"baseParameters": {
-								"schemaGold": "gold",
-								"schemaSilver": "silver",
 								"catalogo": {
 									"value": "@activity('GetConfig').output.firstRow.catalogo",
 									"type": "Expression"
