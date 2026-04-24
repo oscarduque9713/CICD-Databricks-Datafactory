@@ -25,7 +25,9 @@
 		},
 		"dls_con_properties_typeProperties_secretName": {
 			"Value": "storagesecretdev"
+		},
+		"sta_secret_key": {
+			"Value": ""
 		}
-
 	}
 }
