@@ -26,6 +26,10 @@
 		"ls_adb_prod_properties_typeProperties_existingClusterId": {
 			"type": "string",
 			"defaultValue": "0409-155234-i86h65ts"
+		},
+		"dls_con_properties_typeProperties_storageAccountUrl": {
+			"type": "string",
+			"defaultValue": "https://adlssmartprojectdev13.dfs.core.windows.net/"
 		}
 	},
 	"variables": {
