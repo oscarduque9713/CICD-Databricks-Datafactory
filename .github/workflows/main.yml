@@ -1,83 +1,35 @@
-name: Unified-Production-Deploy
+name: Deploy-ADF-Production
 
 on:
   push:
     branches:
-      - main
+      - main # Se activa al hacer push o merge a main
 
 jobs:
-  # --- JOB 1: DESPLIEGUE DE NOTEBOOKS ---
-  deploy-databricks:
+  deploy:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout Repository
-      uses: actions/checkout@v3
-    
-    - name: Install jq & curl
-      run: sudo apt-get update && sudo apt-get install -y jq curl
-    
-    - name: Export multiple notebooks from DEV
-      run: |
-        ORIGIN_HOST=${{ secrets.DATABRICKS_ORIGIN_HOST }}
-        ORIGIN_TOKEN=${{ secrets.DATABRICKS_ORIGIN_TOKEN }}
-        NOTEBOOK_BASE="/Workspace/Users/duque.smart1397@outlook.com/CICD-Databricks-Datafactory/Proceso"
-        NOTEBOOKS=("0.Preparacion_Ambiente_SE" "1.Ingest_Bronze_SE" "2.Transform_Silver_SE")
-        
-        mkdir -p notebooks_to_deploy
-        for nb in "${NOTEBOOKS[@]}"; do
-          echo "Exportando $nb..."
-          curl -s -X GET \
-            -H "Authorization: Bearer $ORIGIN_TOKEN" \
-            "$ORIGIN_HOST/api/2.0/workspace/export?path=$NOTEBOOK_BASE/$nb&format=SOURCE&direct_download=true" \
-            --output "notebooks_to_deploy/$nb.py"
-        done
-    
-    - name: Import notebooks to PROD
-      run: |
-        DEST_HOST=${{ secrets.DATABRICKS_DEST_HOST }}
-        DEST_TOKEN=${{ secrets.DATABRICKS_DEST_TOKEN }}
-        DEST_BASE="/Workspace/Users/duque.smart1397@outlook.com/deploySE"
-        
-        # Crear carpeta de destino
-        curl -s -X POST -H "Authorization: Bearer $DEST_TOKEN" -H "Content-Type: application/json" \
-          -d "{\"path\":\"$DEST_BASE\"}" "$DEST_HOST/api/2.0/workspace/mkdirs"
-
-        for file in notebooks_to_deploy/*.py; do
-          name=$(basename "$file" .py)
-          dest_path="$DEST_BASE/$name"
-          echo "Importando $file → $dest_path"
-          curl -s -X POST \
-            -H "Authorization: Bearer $DEST_TOKEN" \
-            -H "Content-Type: multipart/form-data" \
-            -F "path=$dest_path" -F "format=SOURCE" -F "language=PYTHON" -F "overwrite=true" \
-            -F "content=@$file" "$DEST_HOST/api/2.0/workspace/import"
-        done
-
-  # --- JOB 2: DESPLIEGUE DE DATA FACTORY ---
-  deploy-adf:
-    needs: deploy-databricks # Espera a que los notebooks terminen
-    runs-on: ubuntu-latest
-    steps:
+      # 1. Bajamos el código de la rama adf_publish (donde están las plantillas)
       - name: Checkout adf_publish branch
         uses: actions/checkout@v3
         with:
-          ref: adf_publish # Bajamos las plantillas ARM
+          ref: adf_publish
 
+      # 2. Login en Azure usando tu secreto
       - name: Azure Login
         uses: azure/login@v1
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
+      # 3. Despliegue de la plantilla ARM
       - name: Deploy ARM Template
         uses: azure/arm-deploy@v1
         with:
-          resourceGroupName: "rg-Oscar-DEV" # Cambia esto a rg-Oscar-PROD si es necesario
+          resourceGroupName: "rg-Oscar-DEV" # Asegúrate de tener este secreto
+          # Ajusta la ruta si tu carpeta tiene un nombre específico
           template: ./adfsprojectosc97dev/ARMTemplateForFactory.json 
           parameters: >-
             ./adfsprojectosc97dev/ARMTemplateParametersForFactory.json
             factoryName="adfsprojectosc97prod"
             dls_con_properties_typeProperties_storageAccountUrl="https://adlssmartproject13prod.dfs.core.windows.net/"
             dls_con_properties_typeProperties_secretName="storagesecretprod"
-
-      - name: Done
-        run: echo "🎉 ¡Databricks y ADF desplegados en Producción!"
