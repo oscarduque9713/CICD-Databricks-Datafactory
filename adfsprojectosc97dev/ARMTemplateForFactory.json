@@ -313,36 +313,32 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/dls_con')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"parameters": {
-					"storage": {
-						"type": "string",
-						"defaultValue": "storagesecretdev"
-					}
-				},
-				"annotations": [],
-				"type": "AzureBlobFS",
-				"typeProperties": {
-					"url": "https://adlssmartprojectdev13.dfs.core.windows.net/",
-					"accountKey": {
-						"type": "AzureKeyVaultSecret",
-						"store": {
-							"referenceName": "akvdev",
-							"type": "LinkedServiceReference"
-						},
-						"secretName": {
-							"value": "@linkedService().storage",
-							"type": "Expression"
-						}
-					}
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/akvdev')]"
-			]
+		    "name": "[concat(parameters('factoryName'), '/dls_con')]",
+		    "type": "Microsoft.DataFactory/factories/linkedServices",
+		    "apiVersion": "2018-06-01",
+		    "properties": {
+		        "annotations": [],
+		        "type": "AzureBlobFS",
+		        "typeProperties": {
+		            // CAMBIO 1: Usar el parámetro de la plantilla para la URL
+		            "url": "[parameters('dls_con_properties_typeProperties_storageAccountUrl')]",
+		            "accountKey": {
+		                "type": "AzureKeyVaultSecret",
+		                "store": {
+		                    "referenceName": "akvdev",
+		                    "type": "LinkedServiceReference"
+		                },
+		                "secretName": {
+		                    // CAMBIO 2: Usar el parámetro de la plantilla para el nombre del secreto
+		                    "value": "[parameters('dls_con_properties_typeProperties_secretName')]",
+		                    "type": "Expression"
+		                }
+		            }
+		        }
+		    },
+		    "dependsOn": [
+		        "[concat(variables('factoryId'), '/linkedServices/akvdev')]"
+		    ]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/ls_adb_dev')]",
