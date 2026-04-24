@@ -35,9 +35,9 @@
 			"type": "string",
 			"defaultValue": "storagesecretdev"
 		},
-		"sta_secret_key": {
-        "type": "securestring",
-        "defaultValue": ""
+			"sta_secret_key": {
+	        "type": "securestring",
+	        "defaultValue": ""
 		}
     }
 	},
