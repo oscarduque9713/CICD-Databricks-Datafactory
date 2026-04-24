@@ -325,14 +325,10 @@
 		        "annotations": [],
 		        "type": "AzureBlobFS",
 		        "typeProperties": {
-		            // CAMBIO 1: Usar el parámetro de la plantilla para la URL
 		            "url": "[parameters('dls_con_properties_typeProperties_storageAccountUrl')]",
 		            "accountKey": {
-		                "type": "SecureString",
-		                "accountKey": {
 		                    "type": "SecureString",
 		                    "value": "[parameters('sta_secret_key')]"
-		                }
 					}
 		        }
 		    },
