@@ -22,6 +22,10 @@
 		},
 		"dls_con_properties_typeProperties_storageAccountUrl": {
 			"value": "https://adlssmartprojectdev13.dfs.core.windows.net/"
+		},
+		"dls_con_properties_typeProperties_secretName": {
+			"Value": "storagesecretdev"
 		}
+
 	}
 }
