@@ -77,7 +77,7 @@ jobs:
             ./adfsprojectosc97dev/ARMTemplateParametersForFactory.json
             factoryName="adfsprojectosc97prod"
             dls_con_properties_typeProperties_storageAccountUrl="https://adlssmartproject13prod.dfs.core.windows.net/"
-            dls_con_properties_typeProperties_secretName="storagesecretprod"
+            dls_con_properties_typeProperties_secretName="storagescrepnewprod"
 
       - name: Done
         run: echo "🎉 ¡Databricks y ADF desplegados en Producción!"
