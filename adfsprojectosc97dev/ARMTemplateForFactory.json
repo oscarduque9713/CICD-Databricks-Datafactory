@@ -34,7 +34,12 @@
 		"dls_con_properties_typeProperties_secretName": {
 			"type": "string",
 			"defaultValue": "storagesecretdev"
+		},
+		"sta_secret_key": {
+        "type": "securestring",
+        "defaultValue": ""
 		}
+    }
 	},
 	"variables": {
 		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
@@ -323,21 +328,15 @@
 		            // CAMBIO 1: Usar el parámetro de la plantilla para la URL
 		            "url": "[parameters('dls_con_properties_typeProperties_storageAccountUrl')]",
 		            "accountKey": {
-		                "type": "AzureKeyVaultSecret",
-		                "store": {
-		                    "referenceName": "akvdev",
-		                    "type": "LinkedServiceReference"
-		                },
-		                "secretName": {
-		                    // CAMBIO 2: Usar el parámetro de la plantilla para el nombre del secreto
-		                    "value": "[parameters('dls_con_properties_typeProperties_secretName')]",
-		                    "type": "Expression"
+		                "type": "SecureString",
+		                "accountKey": {
+		                    "type": "SecureString",
+		                    "value": "[parameters('sta_secret_key')]"
 		                }
-		            }
 		        }
 		    },
 		    "dependsOn": [
-		        "[concat(variables('factoryId'), '/linkedServices/akvdev')]"
+		        "[]"
 		    ]
 		},
 		{
