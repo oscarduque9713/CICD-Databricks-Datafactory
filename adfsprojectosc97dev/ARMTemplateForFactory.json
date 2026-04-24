@@ -39,7 +39,6 @@
 	        "type": "securestring",
 	        "defaultValue": ""
 		}
-    }
 	},
 	"variables": {
 		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
