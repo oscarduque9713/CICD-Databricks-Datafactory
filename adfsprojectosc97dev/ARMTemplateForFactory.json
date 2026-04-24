@@ -333,11 +333,10 @@
 		                    "type": "SecureString",
 		                    "value": "[parameters('sta_secret_key')]"
 		                }
+					}
 		        }
 		    },
-		    "dependsOn": [
-		        "[]"
-		    ]
+		    "dependsOn": []
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/ls_adb_dev')]",
