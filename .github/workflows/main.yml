@@ -75,7 +75,7 @@ jobs:
           template: ./adfsprojectosc97dev/ARMTemplateForFactory.json 
           parameters: >-
             ./adfsprojectosc97dev/ARMTemplateParametersForFactory.json
-            factoryName="adfsprojectosc97prod"
+            factoryName="adfsprojectosc9713prod"
             dls_con_properties_typeProperties_storageAccountUrl="https://adlssmartproject13prod.dfs.core.windows.net/"
             dls_con_properties_typeProperties_secretName="storagescrepnewprod"
 
