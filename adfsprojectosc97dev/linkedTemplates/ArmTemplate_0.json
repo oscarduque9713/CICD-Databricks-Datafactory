@@ -205,7 +205,7 @@
 						"userProperties": [],
 						"typeProperties": {
 							"notebookPath": {
-								"value": "@concat( activity('GetConfig').output.firstRow.path, '0.Preparacion_Ambiente')",
+								"value": "@concat( activity('GetConfig').output.firstRow.path, '0.Preparacion_Ambiente_SE')",
 								"type": "Expression"
 							},
 							"baseParameters": {
@@ -267,7 +267,7 @@
 						"userProperties": [],
 						"typeProperties": {
 							"notebookPath": {
-								"value": "@concat( activity('GetConfig').output.firstRow.path, '2.Ingest_Orders')",
+								"value": "@concat( activity('GetConfig').output.firstRow.path, '1.Ingest_Bronze_SE')",
 								"type": "Expression"
 							},
 							"baseParameters": {
@@ -325,7 +325,7 @@
 						"userProperties": [],
 						"typeProperties": {
 							"notebookPath": {
-								"value": "@concat( activity('GetConfig').output.firstRow.path, '4.Transform_Orders_end')",
+								"value": "@concat( activity('GetConfig').output.firstRow.path, '2.Transform_Silver_SE')",
 								"type": "Expression"
 							},
 							"baseParameters": {
